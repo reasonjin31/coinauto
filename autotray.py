@@ -15,7 +15,7 @@ low = "" # 저가
 open = "" # 시가
 close = "" # 종가
 startFlag = False
-myToken = "xoxb-2169356768131-2345914455761-X040xJc83sL1tIi4Ci0Ad4Ye" # slack Key
+myToken = "xoxb-2169356768131-2345914455761-Jkt8HbyV1I2HaNBP6GwyvPVx" # slack Key
 buy_krw = "" # 매수 원화 합계 
 sell_krw = "" # 매도 원화 합계
 #
