@@ -15,14 +15,14 @@ import requests
 
 
 #test2  
-access = "2yMdlMtyu9SM1LX5yZCw0pbMymHftbDxcybWI3pY"          # 본인 값 으로 변경
-secret = "gbuvuGctSV37k0XEscWHJ7TkkbpgZcacM8LIcwsa"          # 본인 값으로 변경
+access = "ASc4pLpj5pNA2U06jaBDbIx7bpxqOx2UTioPowhG"          # 본인 값 으로 변경
+secret = "xrwdu1ELJ0VxxL8GqwWKkqoNxUqQKdYhYxGh8BbD"          # 본인 값으 로 변경
 upbit = pyupbit.Upbit(access, secret)
 
 print(upbit.get_balance("KRW"))     # KRW- XRP 조회
-print(upbit.get_balance("KRW-ETC"))     # KRW-XRP 조회
-print(upbit.get_balance("KRW-EOS"))     # KRW-XRP 조회
-print(upbit.get_balance("KRW-BCH"))     # 보유 현금 조회
+print(upbit.get_balance("KRW-SC"))     # KRW-XRP 조회
+print(upbit.get_balance("KRW-POWR"))     # KRW-XRP 조회
+print(upbit.get_balance("KRW-BTC"))     # 보유 현금 조회
 
 
 df = pyupbit.get_ohlcv("KRW-MED", count=5)
