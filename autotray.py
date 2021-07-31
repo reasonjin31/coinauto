@@ -5,7 +5,7 @@ import requests
 
 access = "2yMdlMtyu9SM1LX5yZCw0pbMymHftbDxcybWI3pY"          # 본인 값으로 변경
 secret = "gbuvuGctSV37k0XEscWHJ7TkkbpgZcacM8LIcwsa"          # 본인 값으로 변경
-coin_ticker = "KRW-BTC" # 구매하고자 하는 코인 티커
+coin_ticker = "KRW-BTC" #   구매하고자 하는 코인 티커
 buy_currency = "KRW" # 구매 통화(무조건 원화)
 sell_ticker = "BTC" # 판매 종목
 bestK = 0.5 # 최적의 K값
