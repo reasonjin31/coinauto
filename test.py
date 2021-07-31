@@ -30,7 +30,7 @@ df['ma'] = df['close'].rolling(window=5).mean()
 # df['rate'] = (df['range'] / df['close']) * 100
 print(df)
 now = datetime.datetime.now()
-print(now)
+print(now)  
 
 # df = pyupbit.get_ohlcv("KRW-MED", interval="day", count=1) # 9시 가져옴
 # start_time = df.index[0]
