@@ -15,7 +15,7 @@ low = "" # 저가
 open = "" # 시가
 close = "" # 종가
 startFlag = False
-myToken = "xoxb-2169356768131-2166089342501-TLZTjdVL6XflvxiJi3aGYmd2" # slack Key
+myToken = "xoxb-2169356768131-2166089342501-NED9YGgbdJKlnKczI6FRYHnS" # slack Key
 buy_krw = "" # 매수 원화 합계 
 sell_krw = "" # 매도 원화 합계
 #
@@ -106,7 +106,7 @@ while True:
                     krw = get_balance(buy_currency)
                     if krw > 5000: # 최소 주문금액인 5000원 이상일 때 시장가 매수
                         upbit.buy_market_order(coin_ticker, krw*0.9995) #수수료 0.05% 포함
-                        buy_krw = krw
+                        buy_krw = krw 
                         print('매수 완료..')
                         post_message(myToken,"#stock-trading","매수 완료")
                         isBuying = True
