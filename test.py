@@ -37,6 +37,6 @@ print(now)
 # end_time = start_time + datetime.timedelta(days=1)
 # print(end_time- datetime.timedelta(seconds=20))
 
-# nohup python3 autotray.py > output.log &
+# nohup python3 autotray.py > output.log & 
 # git pull origin main
 # 
