@@ -27,7 +27,7 @@ print(upbit.get_balance("KRW-BTC"))     # 보유 현금 조회
 
 df = pyupbit.get_ohlcv("KRW-MED", count=5)
 df['ma'] = df['close'].rolling(window=5).mean()
-df['rate'] = (df['range'] / df['close']) * 100
+# df['rate'] = (df['range'] / df['close']) * 100
 print(df)
 now = datetime.datetime.now()
 print(now)
@@ -38,4 +38,4 @@ print(now)
 # print(end_time- datetime.timedelta(seconds=20))
 
 # nohup python3 bitcoinautotray.py > output.log &
-# git pull origin master
+# git pull origin main
