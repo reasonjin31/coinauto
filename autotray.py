@@ -15,7 +15,7 @@ low = "" # 저가
 open = "" # 시가
 close = "" # 종가
 startFlag = False
-myToken = "xoxb-2169356768131-2166089342501-WlyA7Qa0ABcGahbGcInuo6TD" # slack Key
+myToken = "xoxb-2169356768131-2345914455761-X040xJc83sL1tIi4Ci0Ad4Ye" # slack Key
 buy_krw = "" # 매수 원화 합계 
 sell_krw = "" # 매도 원화 합계
 #
@@ -94,7 +94,7 @@ while True:
                 (target_price, target_rate) = get_target_price(coin_ticker, bestK)
                 announcement = now_date + " " + sell_ticker + " 자동매매 시작 합니다." + "\n오늘의 목표가 : " + str(target_price) + "\n필요 상승률 : " + str(round(target_rate,2)) + "%"
                 print(announcement)
-                post_message(myToken,"#stock-trading",announcement)
+                post_message(myToken,"#coin -trading",announcement)
             if isBuying != True: # 매수 가능 시간대 중 아직 매수 안한 상태면
                 ma5 = get_ma5(coin_ticker) # 5일 이동평균선 구하기
                 current_price = get_current_price(coin_ticker) # 현재가 구하기
@@ -108,7 +108,7 @@ while True:
                         upbit.buy_market_order(coin_ticker, krw*0.9995) #수수료 0.05% 포함
                         buy_krw = krw
                         print('매수 완료..')
-                        post_message(myToken,"#stock-trading","매수 완료")
+                        post_message(myToken,"#coin-trading","매수 완료")
                         isBuying = True
                     #else:
                        # print('매수할 원화가 부족합니다')
@@ -120,20 +120,20 @@ while True:
                         upbit.sell_market_order(coin_ticker,  s_balance*0.9995)
                         print('현재가 : ', current_price)
                         print(sell_ticker, '매수가 4% 이상 하락해서 전액 매도 완료..')
-                        post_message(myToken,"#stock-trading","매수가 4% 이상 하락해서 전액 매도 완료..")
+                        post_message(myToken,"#coin-trading","매수가 4% 이상 하락해서 전액 매도 완료..")
         else: # 마지막 10초 남기고 종가에 시장가 매도
             startFlag = False
             s_balance = get_balance(sell_ticker)
             if s_balance > 0.00008:
                 current_price = get_current_price(coin_ticker)
-                upbit.sell_market_order(coin_ticker,  s_balance*0.9995)
+                upbit.sell_market_order(coin_ticker,  s_balance*0.9995) 
                 sell_krw = get_balance(buy_currency) # 매도 후 원화 잔액
                 print(sell_ticker, ' 매도 완료..')
                 # earning = current_price - target_price # 목표가 - 종가 = 매수 후 상승 or 하락 범위 
                 # earning_rate = earning / target_price * 100 # 수익률 or 손실률
                 # print("수익 금액 : ",sell_krw - buy_krw)
                 # print("수익률 or 손실률 : ",earning_rate)
-                # post_message(myToken,"#stock","매도 완료 " + sell_krw - buy_krw + "원 수익")
+                # post_message(myToken,"#coin","매도 완료 " + sell_krw - buy_krw + "원 수익")
         time.sleep(1)
     except Exception as e:
         print(e)
