@@ -15,7 +15,7 @@ import requests
 
 
 #test2  
-access = "2yMdlMtyu9SM1LX5yZCw0pbMymHftbDxcybWI3pY"          # 본인 값으로 변경
+access = "2yMdlMtyu9SM1LX5yZCw0pbMymHftbDxcybWI3pY"          # 본인 값 으로 변경
 secret = "gbuvuGctSV37k0XEscWHJ7TkkbpgZcacM8LIcwsa"          # 본인 값으로 변경
 upbit = pyupbit.Upbit(access, secret)
 
