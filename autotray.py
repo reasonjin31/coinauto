@@ -26,7 +26,7 @@ def post_message(token, channel, text):
         headers={"Authorization": "Bearer "+token},
         data={"channel": channel,"text": text}
     )
-    # print(response)
+    print(response)
  
 
 
