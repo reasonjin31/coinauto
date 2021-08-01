@@ -55,7 +55,7 @@ def get_possible_coin_list() :
     
 # ####업비트 내 특정 코인의 24시간 거래 대금 가져오기 
 def get_acc_trade_price_24h(coin):
-    print("called : " + str(coin))
+    # print("called : " + str(coin))
     
     # 요청 가능회수 확보를 위해 기다리는 시간(초)
     err_sleep_time = 0.3
@@ -63,7 +63,6 @@ def get_acc_trade_price_24h(coin):
     url = "https://api.upbit.com/v1/ticker"
     # querystring = {"markets":"KRW-DOGE"}
     querystring = {"markets": coin}   
-    print("querystring" + str(querystring))
     headers = {"Accept": "application/json"} 
     response = requests.request("GET", url, headers=headers, params=querystring)
     try:
@@ -74,20 +73,31 @@ def get_acc_trade_price_24h(coin):
         json_data = (json.loads(response.text))
         # print(type(json_data))
         if(json_data[0]['acc_trade_price_24h']>0):
-            print(json_data[0]['acc_trade_price_24h'])
+            # print(json_data[0]['acc_trade_price_24h'])
+            return json_data[0]['acc_trade_price_24h']
+
     except Exception as e:
         print(e)
         print(response) 
  
-    # return json_data[0]['acc_trade_price_24h']
+    
  
 # while True:
 
 possible_coin_list = get_possible_coin_list()
     # print(possible_coin_list)
+dict = []
+
 for i in possible_coin_list:
-    print("call : " + str(i))
-    get_acc_trade_price_24h(i)
+    # print("call : " + str(i))
+    result = get_acc_trade_price_24h(i)
+    #코인 별 거래대금 insert
+    dict[i] = result
+
+max_val = max(dict.values)
+print("max_val : " +str(max_val))
+print("max_val :"+str(dict[max_val]) )
+
 
 # print(json_val['acc_trade_price_24h'])
 # df = pyupbit.get_ohlcv("KRW-MED", interval="day", count=1) # 9시 가져옴
