@@ -49,7 +49,7 @@ def get_possible_coin_list() :
         if(i['market'].startswith('KRW')):
             possible_coin_list.append(i['market'])
 
-    print(possible_coin_list)  
+    # print(possible_coin_list)  
     return possible_coin_list
     
 # ####업비트 내 특정 코인의 24시간 거래대금 가져오기 
@@ -67,9 +67,10 @@ def get_acc_trade_price_24h(coin):
     #24시간 거래 누적대금 가져오기
     json_data = (json.loads(response.text))
     # print(type(json_data))
-    print(json_data[0]['acc_trade_price_24h'])
+    if(json_data[0]['acc_trade_price_24h']>0):
+        print(json_data[0]['acc_trade_price_24h'])
 
-    return json_data[0]['acc_trade_price_24h']
+    # return json_data[0]['acc_trade_price_24h']
 
 while True:
 
