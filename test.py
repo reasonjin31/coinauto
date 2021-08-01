@@ -54,9 +54,11 @@ def get_possible_coin_list() :
 # ####업비트 내 특정 코인의 24시간 거래대금 가져오기 
 def get_acc_trade_price_24h(coin):
     print("called : " + str(coin))
+
     url = "https://api.upbit.com/v1/ticker"
-    querystring = {"markets":"KRW-BTC"}
-    headers = {"Accept": "application/json"}
+    # querystring = {"markets":"KRW-BTC"}
+    querystring = {"markets": coin}  
+    headers = {"Accept": "application/json"} 
     response = requests.request("GET", url, headers=headers, params=querystring)
     
     # json 변환 참고 https://www.python2.net/questions-479121.htm
