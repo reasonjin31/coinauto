@@ -45,8 +45,8 @@ secret = "xrwdu1ELJ0VxxL8GqwWKkqoNxUqQKdYhYxGh8BbD"          # 본인 값으 로
 
 url = "https://api.upbit.com/v1/ticker"
 
-# BTC/KRW
-querystring = {"name":"KRW-BTC"}
+
+querystring = {"name":"BTC/KRW"}
 
 headers = {"Accept": "application/json"}
 
