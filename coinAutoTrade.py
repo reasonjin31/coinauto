@@ -170,7 +170,8 @@ def buy_coin(coin_ticker):
         if coin_ticker in bought_list: # 매수 완료 종목이면 더 이상 안 사도록 함수 종료
             #printlog('code:', code, 'in', bought_list)
             return False
-        time_now = datetime.now()
+            
+        
         print('code :',coin_ticker)
 
         ma5 = get_ma5(coin_ticker) # 5일 이동평균선 구하기
