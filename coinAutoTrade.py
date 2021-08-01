@@ -88,11 +88,6 @@ def get_current_price(ticker):
  #   """현재가 조회"""
     return pyupbit.get_orderbook(tickers=ticker)[0]["orderbook_units"][0]["ask_price"]
 
-# 로그인
-upbit = pyupbit.Upbit(access, secret)
-print("Autotrade start..!!")
-
-ma5 = get_ma5(coin_ticker) # 5일 이동평균선
 
 
 
@@ -211,6 +206,11 @@ def sell_all():
     except Exception as ex:
         print("sell_all() -> exception! " + str(ex))
 
+# 로그인
+upbit = pyupbit.Upbit(access, secret)
+print("Autotrade start..!!")
+
+ma5 = get_ma5(coin_ticker) # 5일 이동평균선
 
 # 자동매매 시작
 # 매수 조건 충족 시 한방에 모든 원화를 털어서 사기 때문에 한번 매수하면 이후 while문은 원화 잔고가 없어 그냥 루프만 돔
@@ -239,7 +239,8 @@ while True:
                     time.sleep(1)
         if sell_time < now < exit_time:
             if len(bought_list) > 0:
-                sell_all()
+                print("sell all")
+                #sell_all()
 
     except Exception as e:
         print(e)
