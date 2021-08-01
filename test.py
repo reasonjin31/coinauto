@@ -48,8 +48,8 @@ json_data = (json.loads(response.text))
 # print(json_data) 
 
 for i in json_data:
-     print(i)
-     print(json_data[0])
+    for j in json_data[i]:
+         print(json_data[i][j])
     #  print(json_data[i]['market'])
  
 
