@@ -49,7 +49,8 @@ json_data = (json.loads(response.text))
  
 for i in json_data:
     print(i)
-    print(type(i))
+    # print(type(i)) #type dict 즉, dict의 모음을 list로 인식중
+    print(i['market'])
  
 # ####업비트 내 특정 코인의 24시간 거래대금 가져오기 
 # url = "https://api.upbit.com/v1/ticker"
