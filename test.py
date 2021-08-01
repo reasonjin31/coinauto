@@ -124,10 +124,12 @@ while True:
         for i in  range(0,len(balances)) :
             df.iloc[i]=[ str(balances[i]['currency']), str(balances[i]['balnace'])]
             print("i"+str(i))
-            # print("x"+str(balances[i]))
-            # print("y"+str(balances[i]['currency']))
-            print(df)
-        print(df)     
+            print("x"+str(balances[i]))
+            print("y"+str(balances[i]['currency']))
+            print("z"+str(balances[i]['balnace']))
+            print("xxx"+str(df))
+            print("df"+str(df))
+        # print(df)     
 
         time.sleep(1) 
     except Exception as e:
