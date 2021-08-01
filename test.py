@@ -3,6 +3,7 @@ import datetime
 import requests
 import json 
 import time
+import pandas as pd
 
 # def post_message(token, channel, text):
 #     response = requests.post("https://slack.com/api/chat.postMessage",
@@ -86,19 +87,24 @@ def get_acc_trade_price_24h(coin):
 
 possible_coin_list = get_possible_coin_list()
     # print(possible_coin_list)
-dict = []
 
-for i in possible_coin_list:
-    # print("call : " + str(i))
-    result = get_acc_trade_price_24h(i)
-    print(result)
-    #코인 별 거래대금 insert
-#     dict[i] = str(result)
+df = pd.DataFrame(columns = ['coin' , 'trade_price'])
 
-# max_val = max(dict.values)
-# print("max_val : " +str(max_val))
-# print("max_val :"+str(dict[max_val]) )
+# for i in possible_coin_list:
+#     # print("call : " + str(i))
+#     result = get_acc_trade_price_24h(i)
+#     # print(result)
+#     df.loc[1]=[ 'Mango', 4, 'No' ]
 
+for i in range(0,len(possible_coin_list)):
+     # print("call : " + str(i))
+     result = get_acc_trade_price_24h(possible_coin_list[i])
+     # print(result)
+     
+     df.loc[i]=[ possible_coin_list[i], result]
+
+
+print(df)
  
 # print(json_val['acc_trade_price_24h'])
 # df = pyupbit.get_ohlcv("KRW-MED", interval="day", count=1) # 9시 가져옴
