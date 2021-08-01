@@ -75,7 +75,8 @@ while True:
     querystring = {"isDetails":"false"}
     headers = {"Accept": "application/json"}
     response = requests.request("GET", url, headers=headers, params=querystring)
-    json_data = (json.loads(response.text.decode("utf-8")))
+    response.decode('utf-8')
+    json_data = (json.loads(response.text))
     possible_coin_list = []
     
     for i in json_data:
