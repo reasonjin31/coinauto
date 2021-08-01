@@ -121,7 +121,7 @@ while True:
         df = pd.DataFrame(columns = ['coin' , 'balance'])
 
         for i in  range(0,len(balances)) :
-            df.loc[i]=[ balances['currency'], balances['balnace']]
+            df.loc[i]=[ balances[i]['currency'], balances[i]['balnace']]
         print(df)    
 
         time.sleep(1)
