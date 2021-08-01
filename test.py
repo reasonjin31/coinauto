@@ -119,14 +119,14 @@ while True:
         balances = upbit.get_balances()
 
         df = pd.DataFrame(columns = ['coin' , 'balance'])
-        print(balances)
+        # print(balances)
         print(len(balances))
-        for i in  range(0,len(balances)) :
-            # df.iloc[i]=[ str(balances[i]['currency']), str(balances[i]['balnace'])]
+        for i in range(0,len(balances)) :
+            df.iloc[i]=[ str(balances[i]['currency']), str(balances[i]['balance'])]
             print("i"+str(i))
             print("x"+str(balances[i]))
             print("y"+str(balances[i]['currency']))
-            print("z"+str(balances[i]['balnace']))
+            print("z"+str(balances[i]['balance']))
             print("xxx"+str(df))
             print("df"+str(df))
         # print(df)     
