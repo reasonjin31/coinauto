@@ -52,11 +52,14 @@ headers = {"Accept": "application/json"}
 
 response = requests.request("GET", url, headers=headers, params=querystring)
 
+print(response)
 
-df = response([""][0]["acc_trade_price_24h"])
+json_val = json.dumps(response)
 
-print("df") 
-print(df)
+print("json_val") 
+print(json_val)
+
+print(json_val['acc_trade_price_24h'])
 # df = pyupbit.get_ohlcv("KRW-MED", interval="day", count=1) # 9시 가져옴
 # start_time = df.index[0]
 # end_time = start_time + datetime.timedelta(days=1)
