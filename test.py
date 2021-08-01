@@ -43,14 +43,14 @@ secret = "xrwdu1ELJ0VxxL8GqwWKkqoNxUqQKdYhYxGh8BbD"          # 본인 값으 로
 
 # print(response.text)
 
+
 url = "https://api.upbit.com/v1/ticker"
 
-
-querystring = {"name":"BTC/KRW"}
+querystring = {"markets":"KRW-BTC"}
 
 headers = {"Accept": "application/json"}
 
-response = requests.request("GET", url, headers=headers , params=querystring)
+response = requests.request("GET", url, headers=headers, params=querystring)
 
 print(response.text)
 
