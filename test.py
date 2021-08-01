@@ -57,7 +57,7 @@ responseData = (response.json())
 # df = responseData[3]
 
 print("df") 
-print(responseData)
+print(responseData['trade_date'])
 # df = pyupbit.get_ohlcv("KRW-MED", interval="day", count=1) # 9시 가져옴
 # start_time = df.index[0]
 # end_time = start_time + datetime.timedelta(days=1)
