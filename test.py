@@ -53,8 +53,7 @@ headers = {"Accept": "application/json"}
 
 response = requests.request("GET", url, headers=headers, params=querystring)
 
-print(response)
-
+print(response.text)
 # json_val = json.dumps(response)
 
 # print("json_val") 
