@@ -66,12 +66,16 @@ def get_balance(ticker):
     return 0
 
 def get_balance_all():
-    balances = upbit.get_balances()
     df = pd.DataFrame(columns = ['coin' , 'balance'])
-
-    for i in  range(0,len(balances)) :
-        df.loc[i]=[ balances['currency'], balances['balnace']]
-    return df    
+    for i in range(0,len(balances)) :
+        df.loc[i]=[ str(balances[i]['currency']), str(balances[i]['balance'])]
+            # print("i"+str(i))
+            # print("x"+str(balances[i]))
+            # print("y"+str(balances[i]['currency']))
+            # print("z"+str(balances[i]['balance']))
+            # print("xxx"+str(df))
+            # print("df"+str(df))
+    return df   
 
 
 def get_ma5(ticker):
@@ -195,13 +199,15 @@ def buy_coin(coin_ticker):
 def sell_all():
     """보유한 모든 종목을 매도한다."""
     try:
-        s_balance = get_balance(sell_ticker)
-        if s_balance > 0.00008:
-            current_price = get_current_price(coin_ticker)
-            upbit.sell_market_order(coin_ticker,  s_balance*0.9995) 
-            sell_krw = get_balance(buy_currency) # 매도 후 원화 잔액
-            print(sell_ticker, ' 매도 완료..')
-            time.sleep(30)
+
+        df_get_balance_all = get_balance_all()
+        for s_balance in df_get_balance_all['balance']:
+            if s_balance > 0.00008:
+                current_price = get_current_price(df_get_balance_all['coin'])
+                upbit.sell_market_order(df_get_balance_all['coin'],  s_balance*0.9995) 
+                sell_krw = get_balance(buy_currency) # 매도 후 원화 잔액
+                print(sell_ticker, ' 매도 완료..')
+                time.sleep(30)
     except Exception as ex:
         print("sell_all() -> exception! " + str(ex))
 
@@ -227,8 +233,9 @@ while True:
         # 9:00 < 현재 < 8:59:50 사이에 타겟가를 충족 시 매수
         if start_time < now < sell_time :
             for sym in symbol_list:
+                print("symbol "+ str(sym))
                 if len(bought_list) < target_buy_count:
-                    buy_coin(sym)
+                    #buy_coin(sym)
                     time.sleep(1)
         if sell_time < now < exit_time:
             if len(bought_list) > 0:
