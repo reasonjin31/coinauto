@@ -107,8 +107,8 @@ for i in range(0,len(possible_coin_list)):
 
 # print(df)
 # 거래대금 상위 10 코인리스트
-df_sort_group_top3 = df.sort_values(by="trade_price", ascending=False).groupby("coin").head(10)
-print(df_sort_group_top3)
+df_sort_group_top10 = df.sort_values(by="trade_price", ascending=False).head(10)
+print(df_sort_group_top10)
 
 
 
