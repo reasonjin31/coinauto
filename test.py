@@ -48,8 +48,8 @@ json_data = (json.loads(response.text))
 print(type(json_data))
 print(len(json_data))
 
-# for i in json_data.items():
-#     print(json_data[i]['market'])
+for i in len(json_data):
+    print(json_data[i]['market'])
  
 
 ####업비트 내 특정 코인의 24시간 거래대금 가져오기 
