@@ -71,7 +71,7 @@ def get_acc_trade_price_24h(coin):
         print(json_data[0]['acc_trade_price_24h'])
 
     # return json_data[0]['acc_trade_price_24h']
-
+ 
 while True:
 
     possible_coin_list = get_possible_coin_list()
