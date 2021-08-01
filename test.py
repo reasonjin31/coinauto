@@ -32,8 +32,6 @@ secret = "xrwdu1ELJ0VxxL8GqwWKkqoNxUqQKdYhYxGh8BbD"          # 본인 값으 로
 # now = datetime.datetime.now()
 # print(now)     
 
-possible_coin_list = get_possible_coin_list()
-print(possible_coin_list)
 
 ####업비트 내 거래가능 목록 가져오기
 def get_possible_coin_list() : 
@@ -69,6 +67,10 @@ def get_acc_trade_price_24h(coin):
 
     return json_data[0]['acc_trade_price_24h']
 
+while True:
+
+    possible_coin_list = get_possible_coin_list()
+    print(possible_coin_list)
 
 # print(json_val['acc_trade_price_24h'])
 # df = pyupbit.get_ohlcv("KRW-MED", interval="day", count=1) # 9시 가져옴
