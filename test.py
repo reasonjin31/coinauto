@@ -122,7 +122,7 @@ while True:
         # print(balances)
         print(len(balances))
         for i in range(0,len(balances)) :
-            df.iloc[i]=[ str(balances[i]['currency']), str(balances[i]['balance'])]
+            df.loc[i]=[ str(balances[i]['currency']), str(balances[i]['balance'])]
             print("i"+str(i))
             print("x"+str(balances[i]))
             print("y"+str(balances[i]['currency']))
