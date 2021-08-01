@@ -122,7 +122,8 @@ while True:
 
         for i in  range(0,len(balances)) :
             df.loc[i]=[ balances[i]['currency'], balances[i]['balnace']]
-        print(df)    
+            print(df)
+        print(df)     
 
         time.sleep(1)
     except Exception as e:
