@@ -71,16 +71,16 @@ def get_acc_trade_price_24h(coin):
             print(json_data[0]['acc_trade_price_24h'])
     except Exception as e:
         print(e) 
-
+ 
     # return json_data[0]['acc_trade_price_24h']
  
-while True:
+# while True:
 
-    possible_coin_list = get_possible_coin_list()
+possible_coin_list = get_possible_coin_list()
     # print(possible_coin_list)
-    for i in possible_coin_list:
-        print("call : " + str(i))
-        get_acc_trade_price_24h(i)
+for i in possible_coin_list:
+    print("call : " + str(i))
+    get_acc_trade_price_24h(i)
 
 # print(json_val['acc_trade_price_24h'])
 # df = pyupbit.get_ohlcv("KRW-MED", interval="day", count=1) # 9시 가져옴
