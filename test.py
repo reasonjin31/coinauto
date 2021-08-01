@@ -53,7 +53,7 @@ def get_possible_coin_list() :
     
 # ####업비트 내 특정 코인의 24시간 거래대금 가져오기 
 def get_acc_trade_price_24h(coin):
-    print("호출됨 : " + str(coin))
+    print("called : " + str(coin))
     url = "https://api.upbit.com/v1/ticker"
     querystring = {"markets":"KRW-BTC"}
     headers = {"Accept": "application/json"}
@@ -64,7 +64,7 @@ def get_acc_trade_price_24h(coin):
     #24시간 거래 누적대금 가져오기
     json_data = (json.loads(response.text))
     # print(type(json_data))
-    # print(json_data[0]['acc_trade_price_24h'])
+    print(json_data[0]['acc_trade_price_24h'])
 
     return json_data[0]['acc_trade_price_24h']
 
@@ -73,7 +73,7 @@ while True:
     possible_coin_list = get_possible_coin_list()
     # print(possible_coin_list)
     for i in possible_coin_list:
-        print("호출 : " + str(i))
+        print("call : " + str(i))
         get_acc_trade_price_24h(i)
 
 # print(json_val['acc_trade_price_24h'])
