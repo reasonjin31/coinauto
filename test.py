@@ -3,6 +3,7 @@ import datetime
 import requests
 import json 
 import time
+import pyupbit
 import pandas as pd
 
 # def post_message(token, channel, text):
@@ -83,34 +84,45 @@ def get_acc_trade_price_24h(coin):
  
     
  
-# while True:
+#거래대금 상위 10개 코인 리스트 가져오기
+def df_sort_group_top10():
+    possible_coin_list = get_possible_coin_list()
+        # print(possible_coin_list)
 
-possible_coin_list = get_possible_coin_list()
-    # print(possible_coin_list)
+    df = pd.DataFrame(columns = ['coin' , 'trade_price'])
 
-df = pd.DataFrame(columns = ['coin' , 'trade_price'])
+    # for i in possible_coin_list:
+    #     # print("call : " + str(i))
+    #     result = get_acc_trade_price_24h(i)
+    #     # print(result)
+    #     df.loc[1]=[ 'Mango', 4, 'No' ]
 
+    for i in range(0,len(possible_coin_list)):
+        # print("call : " + str(i))
+        result = get_acc_trade_price_24h(possible_coin_list[i])
+        # print(result)
+        
+        df.loc[i]=[ possible_coin_list[i], result]
 
-# for i in possible_coin_list:
-#     # print("call : " + str(i))
-#     result = get_acc_trade_price_24h(i)
-#     # print(result)
-#     df.loc[1]=[ 'Mango', 4, 'No' ]
-
-for i in range(0,len(possible_coin_list)):
-     # print("call : " + str(i))
-     result = get_acc_trade_price_24h(possible_coin_list[i])
-     # print(result)
-     
-     df.loc[i]=[ possible_coin_list[i], result]
-
-
-# print(df)
-# 거래대금 상위 10 코인리스트
-df_sort_group_top10 = df.sort_values(by="trade_price", ascending=False).head(10)
-print(df_sort_group_top10)
+    # 거래대금 상위 10 코인리스트
+    df_sort_group_top10 = df.sort_values(by="trade_price", ascending=False).head(10)
+    return df_sort_group_top10
 
 
+while True:
+    try:
+        # 거래대금 상위 10 코인리스트(코인명,거래대금) 에서 코인명만 list에 넣기
+        # df_sort_group_top10 = df_sort_group_top10()
+        # symbol_list = df_sort_group_top10['coin']
+        upbit = pyupbit.Upbit(access, secret)
+        
+        balances = upbit.get_balances()
+        print(balances)
+
+        time.sleep(1)
+    except Exception as e:
+        print(e)
+        time.sleep(1)
 
  
 # print(json_val['acc_trade_price_24h'])

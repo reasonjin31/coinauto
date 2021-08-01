@@ -1,12 +1,16 @@
-import time
 import pyupbit
 import datetime
 import requests
+import json 
+import time
+import pandas as pd
+
 
 access = "ASc4pLpj5pNA2U06jaBDbIx7bpxqOx2UTioPowhG"          #  본인  값으로 변경
 secret = "xrwdu1ELJ0VxxL8GqwWKkqoNxUqQKdYhYxGh8BbD"          # 본인 값으로 변경
 coin_ticker = "KRW-BTC" #   구매하고자 하는 코인 티커
 buy_currency = "KRW" # 구매 통화(무조건 원화)
+bought_list = [] #매수된종목
 sell_ticker = "BTC" # 판매 종목
 bestK = 0.5 # 최적의 K값
 isBuying = False # 매수 여부 상태
@@ -77,70 +81,161 @@ print("Autotrade start..!!")
 
 ma5 = get_ma5(coin_ticker) # 5일 이동평균선
 
+
+
+####업비트 내 거래가능 목록 가져오기
+def get_possible_coin_list() : 
+    url = "https://api.upbit.com/v1/market/all"
+    querystring = {"isDetails":"false"}
+    headers = {"Accept": "application/json"}
+    response = requests.request("GET", url, headers=headers, params=querystring)
+    json_data = (json.loads(response.text))
+    possible_coin_list = []
+    
+    for i in json_data:
+        # print(i)
+        # print(type(i)) #type dict 즉, dict의 모음을 list로 인식중
+        # print(i['market']) # 이게 된다!!
+        if(i['market'].startswith('KRW')):
+            possible_coin_list.append(i['market'])
+
+    # print(possible_coin_list)  
+    return possible_coin_list
+    
+# ####업비트 내 특정 코인의 24시간 거래 대금 가져오기 
+def get_acc_trade_price_24h(coin):
+    # print("called : " + str(coin))
+    
+    # 요청 가능회수 확보를 위해 기다리는 시간(초)
+    err_sleep_time = 0.3
+    time.sleep(err_sleep_time)
+    url = "https://api.upbit.com/v1/ticker"
+    # querystring = {"markets":"KRW-DOGE"}
+    querystring = {"markets": coin}   
+    headers = {"Accept": "application/json"} 
+    response = requests.request("GET", url, headers=headers, params=querystring)
+    try:
+        # json 변환 참고 https://www.python2.net/questions-479121.htm
+        # 누적대금 가져오기 참고 https://docs.upbit.com/reference#ticker%ED%98%84%EC%9E%AC%EA%B0%80-%EB%82%B4%EC%97%AD
+        #24시간 거래 누적대금 가져오기
+
+        json_data = (json.loads(response.text))
+        # print(type(json_data))
+        if(json_data[0]['acc_trade_price_24h']>0):
+            # print(json_data[0]['acc_trade_price_24h'])
+            return json_data[0]['acc_trade_price_24h']
+
+    except Exception as e:
+        print(e)
+        print(response) 
+ 
+    
+ 
+#거래대금 상위 10개 코인 리스트 가져오기
+def df_sort_group_top10():
+    possible_coin_list = get_possible_coin_list()
+        # print(possible_coin_list)
+
+    df = pd.DataFrame(columns = ['coin' , 'trade_price'])
+
+    # for i in possible_coin_list:
+    #     # print("call : " + str(i))
+    #     result = get_acc_trade_price_24h(i)
+    #     # print(result)
+    #     df.loc[1]=[ 'Mango', 4, 'No' ]
+
+    for i in range(0,len(possible_coin_list)):
+        # print("call : " + str(i))
+        result = get_acc_trade_price_24h(possible_coin_list[i])
+        # print(result)
+        
+        df.loc[i]=[ possible_coin_list[i], result]
+
+    # 거래대금 상위 10 코인리스트
+    df_sort_group_top10 = df.sort_values(by="trade_price", ascending=False).head(10)
+    return df_sort_group_top10
+
+def buy_coin(coin_ticker):
+    """인자로 받은 종목을 최유리 지정가 FOK 조건으로 매수한다."""
+    try:
+        global bought_list      # 함수 내에서 값 변경을 하기 위해 global로 지정
+        if coin_ticker in bought_list: # 매수 완료 종목이면 더 이상 안 사도록 함수 종료
+            #printlog('code:', code, 'in', bought_list)
+            return False
+        time_now = datetime.now()
+        print('code :',coin_ticker)
+
+        ma5 = get_ma5(coin_ticker) # 5일 이동평균선 구하기
+        current_price = get_current_price(coin_ticker) # 현재가 구하기
+        (target_price, target_rate) = get_target_price(coin_ticker, bestK) #목표가 구하기
+        print('coin :',coin_ticker)
+        print('target price : ', target_price)   
+        print('now price : ', current_price)
+        print('5days average : ', ma5)
+        if target_price < current_price and ma5 < current_price: # 타겟가 도달하고 현재가가 5일 이동평균선 위일 경우
+            print('got target point!!')
+            krw = get_balance(buy_currency) #잔고조회
+            if krw > 5000: # 최소 주문금액인 5000원 이상일 때 시장가 매수
+                upbit.buy_market_order(coin_ticker, krw*0.9995) #수수료 0.05% 포함
+                buy_krw = krw 
+                print(str(coin_ticker) + 'is bought!')
+                post_message(myToken,"#coin-trading","매수 완료")
+    except Exception as ex:
+        print("`buy_coin("+ str(coin_ticker) + ") -> exception! " + str(ex) + "`")
+
+def sell_all():
+    """보유한 모든 종목을 매도한다."""
+    try:
+        s_balance = get_balance(sell_ticker)
+        if s_balance > 0.00008:
+            current_price = get_current_price(coin_ticker)
+            upbit.sell_market_order(coin_ticker,  s_balance*0.9995) 
+            sell_krw = get_balance(buy_currency) # 매도 후 원화 잔액
+            print(sell_ticker, ' 매도 완료..')
+            time.sleep(30)
+    except Exception as ex:
+        print("sell_all() -> exception! " + str(ex))
+
+
 # 자동매매 시작
 # 매수 조건 충족 시 한방에 모든 원화를 털어서 사기 때문에 한번 매수하면 이후 while문은 원화 잔고가 없어 그냥 루프만 돔
 while True:
     try:
-        # symbol_list = [
-        #     #시가총액 상위 
-        #     'BTC',
-        #     ''
+        # 거래대금 상위 10 코인리스트(코인명,거래대금) 에서 코인명만 list에 넣기
+        df_sort_group_top10 = df_sort_group_top10()
+        symbol_list = df_sort_group_top10['coin'] #매수할 종목 리스트
+        # bought_list = []     # 매수 완료된 종목 리스트
+        target_buy_count = 5 # 매수할 종목 수
+        buy_percent = 0.2
 
-        # ]        
+
         now = datetime.datetime.now()
         now_date = now.strftime('%Y-%m-%d')
         start_time = get_start_time(coin_ticker) #9:00 장 시작시간
-        end_time = start_time + datetime.timedelta(days=1) #9:00 + 1일 장 마감시간
-
+        exit_time = start_time + datetime.timedelta(days=1) #9:00 + 1일 장 마감시간
+        sell_time = exit_time - datetime.timedelta(seconds=10) #장마감 10초전
+        
         # 9:00 < 현재 < 8:59:50 사이에 타겟가를 충족 시 매수
-        if start_time < now < end_time - datetime.timedelta(seconds=10):
-            if startFlag != True:
-                startFlag = True
-                isBuying = False
-                (target_price, target_rate) = get_target_price(coin_ticker, bestK)
-                announcement = now_date + " " + sell_ticker + " 자동매매 시작 합니다." + "\n오늘의 목표가 : " + str(target_price) + "\n필요 상승률 : " + str(round(target_rate,2)) + "%"
-                print(announcement)
-                post_message(myToken,"#coin-trading",announcement)
-            if isBuying != True: # 매수 가능 시간대 중 아직 매수 안한 상태면
-                ma5 = get_ma5(coin_ticker) # 5일 이동평균선 구하기
-                current_price = get_current_price(coin_ticker) # 현재가 구하기
-                # print('목표가 : ', target_price)   
-                # print('현재가 : ', current_price)
-                # print('5일이동평균 : ', ma5)
-                if target_price < current_price and ma5 < current_price: # 타겟가 도달하고 현재가가 5일 이동평균선 위일 경우
-                    print('매수 시점 발견!!')
-                    krw = get_balance(buy_currency)
-                    if krw > 5000: # 최소 주문금액인 5000원 이상일 때 시장가 매수
-                        upbit.buy_market_order(coin_ticker, krw*0.9995) #수수료 0.05% 포함
-                        buy_krw = krw 
-                        print('매수 완료..')
-                        post_message(myToken,"#coin-trading","매수 완료")
-                        isBuying = True
-                    #else:
-                       # print('매수할 원화가 부족합니다')
-            else: # 매수 가능 시간대 중 이미 매수한 상태면
-                current_price = get_current_price(coin_ticker) # 현재가 구하기
-                if current_price < target_price * 0.96:  # 매수가 기준 4% 이상 하락 시 전액 매도하는 로직 추가
-                    s_balance = get_balance(sell_ticker)
-                    if s_balance > 0.00008:
-                        upbit.sell_market_order(coin_ticker,  s_balance*0.9995)
-                        print('현재가 : ', current_price)
-                        print(sell_ticker, '매수가 4% 이상 하락해서 전액 매도 완료..')
-                        post_message(myToken,"#coin-trading","매수가 4% 이상 하락해서 전액 매도 완료..")
-        else: # 마지막 10초 남기고 종가에 시장가 매도
-            startFlag = False
-            s_balance = get_balance(sell_ticker)
-            if s_balance > 0.00008:
-                current_price = get_current_price(coin_ticker)
-                upbit.sell_market_order(coin_ticker,  s_balance*0.9995) 
-                sell_krw = get_balance(buy_currency) # 매도 후 원화 잔액
-                print(sell_ticker, ' 매도 완료..')
-                # earning = current_price - target_price # 목표가 - 종가 = 매수 후 상승 or 하락 범위 
-                # earning_rate = earning / target_price * 100 # 수익률 or 손실률
-                # print("수익 금액 : ",sell_krw - buy_krw)
-                # print("수익률 or 손실률 : ",earning_rate)
-                # post_message(myToken,"#coin","매도 완료 " + sell_krw - buy_krw + "원 수익")
-        time.sleep(1)
+        if start_time < now < sell_time :
+            for sym in symbol_list:
+                if len(bought_list) < target_buy_count:
+                    buy_coin(sym)
+                    time.sleep(1)
+        if sell_time < now < exit_time:
+            if len(bought_list) > 0:
+                sell_all()
+
     except Exception as e:
         print(e)
         time.sleep(1)
+
+ 
+# print(json_val['acc_trade_price_24h'])
+# df = pyupbit.get_ohlcv("KRW-MED", interval="day", count=1) # 9시 가져옴
+# start_time = df.index[0]
+# end_time = start_time + datetime.timedelta(days=1)
+# print(end_time- datetime.timedelta(seconds=20))
+
+# nohup python3 autotray.py > output.log & 
+# git pull origin main
+# 
