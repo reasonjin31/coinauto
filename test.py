@@ -54,6 +54,9 @@ headers = {"Accept": "application/json"}
 response = requests.request("GET", url, headers=headers, params=querystring)
 
 print(response.text)
+
+print(response[0]['acc_trade_price_24h'])
+# print(response[0]['acc_trade_price_24h'])
 # json_val = json.dumps(response)
 
 # print("json_val") 
