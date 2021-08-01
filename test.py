@@ -55,12 +55,12 @@ response = requests.request("GET", url, headers=headers, params=querystring)
 
 print(response)
 
-json_val = json.dumps(response)
+# json_val = json.dumps(response)
 
-print("json_val") 
-print(json_val)
+# print("json_val") 
+# print(json_val)
 
-print(json_val['acc_trade_price_24h'])
+# print(json_val['acc_trade_price_24h'])
 # df = pyupbit.get_ohlcv("KRW-MED", interval="day", count=1) # 9시 가져옴
 # start_time = df.index[0]
 # end_time = start_time + datetime.timedelta(days=1)
