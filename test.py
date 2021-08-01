@@ -54,9 +54,9 @@ response = requests.request("GET", url, headers=headers, params=querystring)
 
 responseData = (response.json())
 
-df = responseData["acc_trade_price_24h"]
+df = responseData[3]
 
-print("df")
+print("df") 
 print(df)
 # df = pyupbit.get_ohlcv("KRW-MED", interval="day", count=1) # 9시 가져옴
 # start_time = df.index[0]
