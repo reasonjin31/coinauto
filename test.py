@@ -46,11 +46,16 @@ response = requests.request("GET", url, headers=headers, params=querystring)
 json_data = (json.loads(response.text))
 
 # print(json_data) 
+
+possible_coin_list = []
  
 for i in json_data:
-    print(i)
+    # print(i)
     # print(type(i)) #type dict 즉, dict의 모음을 list로 인식중
-    print(i['market'])
+    # print(i['market']) # 이게 된다!!
+    possible_coin_list.append(i['market'])
+
+print(possible_coin_list)  
  
 # ####업비트 내 특정 코인의 24시간 거래대금 가져오기 
 # url = "https://api.upbit.com/v1/ticker"
