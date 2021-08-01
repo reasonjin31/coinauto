@@ -222,7 +222,7 @@ while True:
         # bought_list = []     # 매수 완료된 종목 리스트
         target_buy_count = 5 # 매수할 종목 수
         buy_percent = 0.2
-
+ 
 
         now = datetime.datetime.now()
         now_date = now.strftime('%Y-%m-%d')
@@ -235,7 +235,7 @@ while True:
             for sym in symbol_list:
                 print("symbol "+ str(sym))
                 if len(bought_list) < target_buy_count:
-                    #buy_coin(sym)
+                    buy_coin(sym)
                     time.sleep(1)
         if sell_time < now < exit_time:
             if len(bought_list) > 0:
