@@ -52,9 +52,9 @@ headers = {"Accept": "application/json"}
 
 response = requests.request("GET", url, headers=headers, params=querystring)
 
-print(response.text)
+responseData = (response.json())
 
-df = response['acc_trade_price_24h']
+df = responseData["acc_trade_price_24h"]
 
 print("df")
 print(df)
