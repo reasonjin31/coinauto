@@ -65,6 +65,15 @@ def get_balance(ticker):
                 return 0
     return 0
 
+def get_balance_all():
+    balances = upbit.get_balances()
+    df = pd.DataFrame(columns = ['coin' , 'balance'])
+
+    for i in  range(0,len(balances)) :
+        df.loc[i]=[ balances['currency'], balances['balnace']]
+    return df    
+
+
 def get_ma5(ticker):
     "5일 이동 평균선 조회"
     df = pyupbit.get_ohlcv(ticker, interval="day", count=5)

@@ -115,9 +115,14 @@ while True:
         # df_sort_group_top10 = df_sort_group_top10()
         # symbol_list = df_sort_group_top10['coin']
         upbit = pyupbit.Upbit(access, secret)
-        
+
         balances = upbit.get_balances()
-        print(balances)
+
+        df = pd.DataFrame(columns = ['coin' , 'balance'])
+
+        for i in  range(0,len(balances)) :
+            df.loc[i]=[ balances['currency'], balances['balnace']]
+        print(df)    
 
         time.sleep(1)
     except Exception as e:
