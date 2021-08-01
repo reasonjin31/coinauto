@@ -92,13 +92,13 @@ for i in possible_coin_list:
     # print("call : " + str(i))
     result = get_acc_trade_price_24h(i)
     #코인 별 거래대금 insert
-    dict[i] = result
+    dict[i] = str(result)
 
 max_val = max(dict.values)
 print("max_val : " +str(max_val))
 print("max_val :"+str(dict[max_val]) )
 
-
+ 
 # print(json_val['acc_trade_price_24h'])
 # df = pyupbit.get_ohlcv("KRW-MED", interval="day", count=1) # 9시 가져옴
 # start_time = df.index[0]
