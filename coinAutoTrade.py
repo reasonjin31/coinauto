@@ -223,6 +223,10 @@ while True:
         # bought_list = []     # 매수 완료된 종목 리스트
         target_buy_count = 5 # 매수할 종목 수
         buy_percent = 0.2
+
+        print("symbolist")
+        print(symbol_list)
+        print(len(symbol_list))
  
 
         now = datetime.datetime.now()
