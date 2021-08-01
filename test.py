@@ -46,11 +46,10 @@ response = requests.request("GET", url, headers=headers, params=querystring)
 json_data = (json.loads(response.text))
 
 # print(json_data) 
-
+ 
 for i in json_data:
-    for j in json_data[i]:
-         print(json_data[i][j])
-    #  print(json_data[i]['market'])
+    cmd = json_data[i]
+    print(cmd['market'])
  
 
 # ####업비트 내 특정 코인의 24시간 거래대금 가져오기 
