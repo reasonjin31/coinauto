@@ -33,10 +33,6 @@ secret = "xrwdu1ELJ0VxxL8GqwWKkqoNxUqQKdYhYxGh8BbD"          # 본인 값으 로
 
 
 
-
-
-import requests
-
 url = "https://api.upbit.com/v1/ticker"
 
 headers = {"Accept": "application/json"}
