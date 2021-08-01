@@ -57,14 +57,18 @@ def get_acc_trade_price_24h(coin):
     print("called : " + str(coin))
 
     url = "https://api.upbit.com/v1/ticker"
-    querystring = {"markets":"KRW-DOGE"}
-    # querystring = {"markets": coin}   
+    # querystring = {"markets":"KRW-DOGE"}
+    querystring = {"markets": coin}   
+    print("querystring" + str(querystring))
     headers = {"Accept": "application/json"} 
     response = requests.request("GET", url, headers=headers, params=querystring)
     try:
         # json 변환 참고 https://www.python2.net/questions-479121.htm
         # 누적대금 가져오기 참고 https://docs.upbit.com/reference#ticker%ED%98%84%EC%9E%AC%EA%B0%80-%EB%82%B4%EC%97%AD
         #24시간 거래 누적대금 가져오기
+        print("response start")
+        print(response)
+        print("response end")
         json_data = (json.loads(response.text))
         # print(type(json_data))
         if(json_data[0]['acc_trade_price_24h']>0):
