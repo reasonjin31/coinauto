@@ -50,7 +50,7 @@ print(len(json_data))
 
 for i in json_data:
     # print("X")
-    print(json_data[i])
+    print(json_data[0][i])
  
 
 ####업비트 내 특정 코인의 24시간 거래대금 가져오기 
