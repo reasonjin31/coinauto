@@ -45,14 +45,12 @@ response = requests.request("GET", url, headers=headers, params=querystring)
 # print(response.text)
 json_data = (json.loads(response.text))
 
+print(type(json_data))
+print(len(json_data))
 
-print(json_data.items())
-print(json_data.keys())
-print(json_data.values())
-
-for i in json_data.items():
-    print(json_data[i]['market'])
-
+# for i in json_data.items():
+#     print(json_data[i]['market'])
+ 
 
 ####업비트 내 특정 코인의 24시간 거래대금 가져오기 
 url = "https://api.upbit.com/v1/ticker"
