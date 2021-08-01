@@ -46,11 +46,11 @@ response = requests.request("GET", url, headers=headers, params=querystring)
 json_data = (json.loads(response.text))
 
 
-print(json_data.items)
-print(json_data.keys)
-print(json_data.values)
+print(json_data.items())
+print(json_data.keys())
+print(json_data.values())
 
-for i in json_data.items:
+for i in json_data.items():
     print(json_data[i]['market'])
 
 
