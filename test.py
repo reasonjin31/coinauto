@@ -1,6 +1,7 @@
 import pyupbit
 import datetime
 import requests
+import json 
 
 # def post_message(token, channel, text):
 #     response = requests.post("https://slack.com/api/chat.postMessage",
