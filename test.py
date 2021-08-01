@@ -57,8 +57,8 @@ def get_acc_trade_price_24h(coin):
     print("called : " + str(coin))
 
     url = "https://api.upbit.com/v1/ticker"
-    # querystring = {"markets":"KRW-BTC"}
-    querystring = {"markets": coin}  
+    querystring = {"markets":"KRW-QTUM"}
+    # querystring = {"markets": coin}   
     headers = {"Accept": "application/json"} 
     response = requests.request("GET", url, headers=headers, params=querystring)
     
