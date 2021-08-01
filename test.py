@@ -31,7 +31,7 @@ secret = "xrwdu1ELJ0VxxL8GqwWKkqoNxUqQKdYhYxGh8BbD"          # 본인 값으 로
 # print(df)
 # now = datetime.datetime.now()
 # print(now)     
-
+ 
 
 ####업비트 내 거래가능 목록 가져오기
 def get_possible_coin_list() : 
@@ -46,7 +46,8 @@ def get_possible_coin_list() :
         # print(i)
         # print(type(i)) #type dict 즉, dict의 모음을 list로 인식중
         # print(i['market']) # 이게 된다!!
-        possible_coin_list.append(i['market'])
+        if(i['market'].startswith('KRW')):
+            possible_coin_list.append(i['market'])
 
     print(possible_coin_list)  
     return possible_coin_list
