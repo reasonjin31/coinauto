@@ -33,18 +33,23 @@ secret = "xrwdu1ELJ0VxxL8GqwWKkqoNxUqQKdYhYxGh8BbD"          # 본인 값으 로
 # print(now)     
 
 
+####업비트 내 거래가능 목록 가져오기
+url = "https://api.upbit.com/v1/market/all"
 
-# url = "https://api.upbit.com/v1/market/all"
+querystring = {"isDetails":"false"}
 
-# querystring = {"isDetails":"false"}
+headers = {"Accept": "application/json"}
 
-# headers = {"Accept": "application/json"}
-
-# response = requests.request("GET", url, headers=headers, params=querystring)
+response = requests.request("GET", url, headers=headers, params=querystring)
 
 # print(response.text)
+json_data = (json.loads(response.text))
+
+for i in 5:
+    print(json_data[i]['market'])
 
 
+####업비트 내 특정 코인의 24시간 거래대금 가져오기 
 url = "https://api.upbit.com/v1/ticker"
 
 querystring = {"markets":"KRW-BTC"}
@@ -54,15 +59,12 @@ headers = {"Accept": "application/json"}
 response = requests.request("GET", url, headers=headers, params=querystring)
 
 print(response.text)
-
+# json 변환 참고 https://www.python2.net/questions-479121.htm
+# 누적대금 가져오기 참고 https://docs.upbit.com/reference#ticker%ED%98%84%EC%9E%AC%EA%B0%80-%EB%82%B4%EC%97%AD
+#24시간 거래 누적대금 가져오기
 json_data = (json.loads(response.text))
-
 print(json_data[0]['acc_trade_price_24h'])
-# print(response[0]['acc_trade_price_24h'])
-# json_val = json.dumps(response)
 
-# print("json_val") 
-# print(json_val)
 
 # print(json_val['acc_trade_price_24h'])
 # df = pyupbit.get_ohlcv("KRW-MED", interval="day", count=1) # 9시 가져옴
