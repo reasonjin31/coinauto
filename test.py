@@ -55,7 +55,9 @@ response = requests.request("GET", url, headers=headers, params=querystring)
 
 print(response.text)
 
-print(response[0]['acc_trade_price_24h'])
+json_data = (json.loads(response.tex))
+
+print(json_data[0]['acc_trade_price_24h'])
 # print(response[0]['acc_trade_price_24h'])
 # json_val = json.dumps(response)
 
