@@ -45,11 +45,11 @@ response = requests.request("GET", url, headers=headers, params=querystring)
 # print(response.text)
 json_data = (json.loads(response.text))
 
-print(json_data) 
+# print(json_data) 
 
 for i in json_data:
      print(i)
-     print(json_data['market'])
+     print(json_data[0])
     #  print(json_data[i]['market'])
  
 
