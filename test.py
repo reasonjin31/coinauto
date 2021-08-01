@@ -48,7 +48,7 @@ def get_possible_coin_list() :
         # print(i['market']) # 이게 된다!!
         possible_coin_list.append(i['market'])
 
-    # print(possible_coin_list)  
+    print(possible_coin_list)  
     return possible_coin_list
     
 # ####업비트 내 특정 코인의 24시간 거래대금 가져오기 
