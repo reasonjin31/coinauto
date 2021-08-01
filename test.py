@@ -53,6 +53,7 @@ def get_possible_coin_list() :
     
 # ####업비트 내 특정 코인의 24시간 거래대금 가져오기 
 def get_acc_trade_price_24h(coin):
+    print("호출됨 : " + str(coin))
     url = "https://api.upbit.com/v1/ticker"
     querystring = {"markets":"KRW-BTC"}
     headers = {"Accept": "application/json"}
@@ -69,23 +70,11 @@ def get_acc_trade_price_24h(coin):
 
 while True:
 
-    # possible_coin_list = get_possible_coin_list()
+    possible_coin_list = get_possible_coin_list()
     # print(possible_coin_list)
-    url = "https://api.upbit.com/v1/market/all"
-    querystring = {"isDetails":"false"}
-    headers = {"Accept": "application/json"}
-    response = requests.request("GET", url, headers=headers, params=querystring)
-    response.decode('utf-8')
-    json_data = (json.loads(response.text))
-    possible_coin_list = []
-    
-    for i in json_data:
-        # print(i)
-        # print(type(i)) #type dict 즉, dict의 모음을 list로 인식중
-        # print(i['market']) # 이게 된다!!
-        possible_coin_list.append(i['market'])
-
-    print(possible_coin_list)  
+    for i in possible_coin_list:
+        print("호출 : " + str(i))
+        get_acc_trade_price_24h(i)
 
 # print(json_val['acc_trade_price_24h'])
 # df = pyupbit.get_ohlcv("KRW-MED", interval="day", count=1) # 9시 가져옴
