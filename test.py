@@ -33,13 +33,23 @@ secret = "xrwdu1ELJ0VxxL8GqwWKkqoNxUqQKdYhYxGh8BbD"          # 본인 값으 로
 
 
 
-url = "https://api.upbit.com/v1/ticker"
+url = "https://api.upbit.com/v1/market/all"
+
+querystring = {"isDetails":"false"}
 
 headers = {"Accept": "application/json"}
 
-response = requests.request("GET", url, headers=headers)
+response = requests.request("GET", url, headers=headers, params=querystring)
 
 print(response.text)
+
+# url = "https://api.upbit.com/v1/ticker"
+
+# headers = {"Accept": "application/json"}
+
+# response = requests.request("GET", url, headers=headers)
+
+# print(response.text)
 
 
 
