@@ -157,9 +157,10 @@ while True:
             print(str(list_get_balance_all[i])) 
             print(df_get_balance_all.loc[i]['balance'])
 
-            sell_coin = "KRW-"+str(list_get_balance_all[i])
-            print ("sell_coin")
-            print(sell_coin)
+            if(str(list_get_balance_all[i])!='KRW'):
+                sell_coin = "KRW-"+str(list_get_balance_all[i])
+                print ("sell_coin")
+                print(sell_coin)
                 # current_price = get_current_price(df_get_balance_all['coin'])
                 # upbit.sell_market_order(df_get_balance_all['coin'],  s_balance*0.9995) 
                 # sell_krw = get_balance(buy_currency) # 매도 후 원화 잔액
