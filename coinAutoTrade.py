@@ -190,8 +190,10 @@ def buy_coin(coin_ticker):
             print('[Target coin] :',coin_ticker,'[Target price] :', target_price, '[Now price] : ',current_price,'[5days average] :',ma5 )
     
             krw = get_balance(buy_currency) #잔고조회
-            if krw > 5000: # 최소 주문금액인 5000원 이상일 때 시장가 매수
-                upbit.buy_market_order(coin_ticker, krw*0.9995) #수수료 0.05% 포함
+            if krw > 5000 and buy_amount > 5000: # 최소 주문금액인 5000원 이상일 때 시장가 매수(계좌 잔고와, 설정된 코인 별 타겟 매수가가 5000원 이상일 때 )
+                # print(upbit.buy_limit_order("KRW-XRP", 500, 20)) #500원에 리플20개 매수
+                # upbit.buy_market_order(coin_ticker, krw*0.9995) #수수료 0.05% 포함
+                upbit.buy_market_order(coin_ticker, buy_amount) 
                 buy_krw = krw 
                 print(str(coin_ticker) + 'is bought!')
                 post_message(myToken,"#coin-trading","매수 완료")
@@ -234,14 +236,13 @@ while True:
         # bought_list = []     # 매수 완료된 종목 리스트
         target_buy_count = 5 # 매수할 종목 수
         buy_percent = 0.2 #증거금 대비 매수비율
-        total_cash = int(get_current_cash())   # 100% 증거금 주문 가능 금액 조회
+        total_cash = int(get_balance(buy_currency))   # 100% 증거금 주문 가능 금액 조회
+        buy_amount = total_cash * buy_percent  # 종목별 주문 금액 계산
+        print('[setting]Buy Targets :', target_buy_count) # 매수할 종목 수
+        print('[setting]100% cash amount :', total_cash) #100% 증거금 주문 가능 금액
+        print('[setting]Buy percent per target :', buy_percent) #종목별 주문 비율
+        print('[setting]Buy amont per target :', buy_amount) #종목별 주문 금액
 
-
-        #print("symbolist")
-        #print(symbol_list)
-        #print(len(symbol_list))
- 
- 
         now = datetime.datetime.now()
         now_date = now.strftime('%Y-%m-%d')
         start_time = get_start_time(coin_ticker) #9:00 장 시작시간
