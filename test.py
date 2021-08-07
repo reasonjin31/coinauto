@@ -159,7 +159,7 @@ while True:
             print(str(list_get_balance_all[i])) 
 
             print("df_get_balance_all.loc[i]")
-            print(df_get_balance_all.loc[i])
+            print(df_get_balance_all.loc[i]['balance'])
 
                 # current_price = get_current_price(df_get_balance_all['coin'])
                 # upbit.sell_market_order(df_get_balance_all['coin'],  s_balance*0.9995) 
