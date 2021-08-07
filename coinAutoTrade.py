@@ -250,25 +250,25 @@ while True:
         sell_time = exit_time - datetime.timedelta(seconds=10) #장마감 10초전
         
         # 9:00 < 현재 < 8:59:50 사이에 타겟가를 충족 시 매수
-        if start_time < now < sell_time :
+        # if start_time < now < sell_time :
 
-            if len(symbol_list) < 10:
-                # 거래대금 상위 10 코인리스트(코인명,거래대금) 에서 코인명만 list에 넣기
-                df_sort_group_top10 = df_sort_group_top10()
-                symbol_list = df_sort_group_top10['coin'] #매수할 종목 리스트
-                print("Program Start! here is Symbolist")
-                print(symbol_list)
+        #     if len(symbol_list) < 10:
+        #         # 거래대금 상위 10 코인리스트(코인명,거래대금) 에서 코인명만 list에 넣기
+        #         df_sort_group_top10 = df_sort_group_top10()
+        #         symbol_list = df_sort_group_top10['coin'] #매수할 종목 리스트
+        #         print("Program Start! here is Symbolist")
+        #         print(symbol_list)
 
-            for sym in symbol_list:
-                # print("symbol "+ str(sym))
-                if len(bought_list) < target_buy_count: 
-                    buy_coin(sym)
-                    time.sleep(1)
-        if sell_time < now < exit_time:
-            if len(bought_list) > 0:
-                print("sell all")
-                sell_all()
-                df_sort_group_top10 = df_sort_group_top10.drop(df_sort_group_top10.index[range(10)])
+        #     for sym in symbol_list:
+        #         # print("symbol "+ str(sym))
+        #         if len(bought_list) < target_buy_count: 
+        #             buy_coin(sym)
+        #             time.sleep(1)
+        # if sell_time < now < exit_time:
+        if len(bought_list) > 0:
+            print("sell all")
+            sell_all()
+            df_sort_group_top10 = df_sort_group_top10.drop(df_sort_group_top10.index[range(10)])
 
 
     except Exception as e:
