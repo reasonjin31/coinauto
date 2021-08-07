@@ -275,11 +275,14 @@ while True:
                 symbol_list = df_sort_group_top10['coin'] #매수할 종목 리스트
                 print("Got Top10 Coin! here is Symbolist")
                 print(symbol_list)
-
+                print("a")
             for sym in symbol_list:
                 # print("symbol "+ str(sym))
+                print("b")
                 if len(bought_list) < target_buy_count: 
+                    print("c")
                     buy_coin(sym)
+                    print("d")
                     time.sleep(5)
         if sell_time < now < exit_time:
             if len(bought_list) > 0:
