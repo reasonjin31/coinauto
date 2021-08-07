@@ -226,7 +226,7 @@ def sell_all():
             # print(upbit.sell_market_order("KRW-XRP", 30))  #리플 30개 시장가매도
             upbit.sell_market_order(sell_coin_and_currency, sell_amount)  #보유수량 시장가매도
             sell_krw = get_balance(buy_currency) # 매도 후 원화 잔액
-            print(sell_coin, ' Sell Comletesell_coin..')
+            print(sell_coin, ' Sell Comlete..')
             time.sleep(30)
     except Exception as ex:
         print("sell_all() -> exception! " + str(ex))
@@ -242,21 +242,25 @@ ma5 = get_ma5(coin_ticker) # 5일 이동평균선
 while True:
     try:
 
-        # bought_list = []     # 매수 완료된 종목 리스트
-        target_buy_count = 5 # 매수할 종목 수
-        buy_percent = 0.2 #증거금 대비 매수비율
-        total_cash = int(get_balance(buy_currency))   # 100% 증거금 주문 가능 금액 조회
-        buy_amount = total_cash * buy_percent  # 종목별 주문 금액 계산
-        print('[setting]Buy Targets :', target_buy_count) # 매수할 종목 수
-        print('[setting]100% cash amount :', total_cash) #100% 증거금 주문 가능 금액
-        print('[setting]Buy percent per target :', buy_percent) #종목별 주문 비율
-        print('[setting]Buy amont per target :', buy_amount) #종목별 주문 금액
+ 
+        df_get_balance_all = get_balance_all() #잔고확인
+        bought_list = df_get_balance_all['coin']# 매수 완료된 종목 리스트
 
-        now = datetime.datetime.now()
-        now_date = now.strftime('%Y-%m-%d')
-        start_time = get_start_time(coin_ticker) #9:00 장 시작시간
-        exit_time = start_time + datetime.timedelta(days=1) #9:00 + 1일 장 마감시간
-        sell_time = exit_time - datetime.timedelta(seconds=10) #장마감 10초전
+
+        # target_buy_count = 5 # 매수할 종목 수
+        # buy_percent = 0.2 #증거금 대비 매수비율
+        # total_cash = int(get_balance(buy_currency))   # 100% 증거금 주문 가능 금액 조회
+        # buy_amount = total_cash * buy_percent  # 종목별 주문 금액 계산
+        # print('[setting]Buy Targets :', target_buy_count) # 매수할 종목 수
+        # print('[setting]100% cash amount :', total_cash) #100% 증거금 주문 가능 금액
+        # print('[setting]Buy percent per target :', buy_percent) #종목별 주문 비율
+        # print('[setting]Buy amont per target :', buy_amount) #종목별 주문 금액
+
+        # now = datetime.datetime.now()
+        # now_date = now.strftime('%Y-%m-%d')
+        # start_time = get_start_time(coin_ticker) #9:00 장 시작시간
+        # exit_time = start_time + datetime.timedelta(days=1) #9:00 + 1일 장 마감시간
+        # sell_time = exit_time - datetime.timedelta(seconds=10) #장마감 10초전
         
         # 9:00 < 현재 < 8:59:50 사이에 타겟가를 충족 시 매수
         # if start_time < now < sell_time :
