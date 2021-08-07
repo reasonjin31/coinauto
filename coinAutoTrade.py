@@ -215,19 +215,20 @@ def sell_all():
         list_get_balance_all = df_get_balance_all['coin']
 
         for i in range(0,len(list_get_balance_all)):
-            sell_coin = list_get_balance_all[i]
-            sell_amount = df_get_balance_all.loc[i]['balance']
+            if(str(list_get_balance_all[i])!='KRW'):
+                sell_coin = list_get_balance_all[i]
+                sell_amount = df_get_balance_all.loc[i]['balance']
 
-            sell_coin_and_currency = "KRW-"+str(sell_coin)
-            print("Trying to Sell [",sell_coin_and_currency,"] Coin [",sell_amount,"] Amount" ) 
+                sell_coin_and_currency = "KRW-"+str(sell_coin)
+                print("Trying to Sell [",sell_coin_and_currency,"] Coin [",sell_amount,"] Amount" ) 
 
-            # current_price = get_current_price(df_get_balance_all['coin'])
-            # upbit.sell_market_order(df_get_balance_all['coin'],  s_balance*0.9995) 
-            # print(upbit.sell_market_order("KRW-XRP", 30))  #리플 30개 시장가매도
-            upbit.sell_market_order(sell_coin_and_currency, sell_amount)  #보유수량 시장가매도
-            sell_krw = get_balance(buy_currency) # 매도 후 원화 잔액
-            print(sell_coin, ' Sell Comlete..')
-            time.sleep(30)
+                # current_price = get_current_price(df_get_balance_all['coin'])
+                # upbit.sell_market_order(df_get_balance_all['coin'],  s_balance*0.9995) 
+                # print(upbit.sell_market_order("KRW-XRP", 30))  #리플 30개 시장가매도
+                upbit.sell_market_order(sell_coin_and_currency, sell_amount)  #보유수량 시장가매도
+                sell_krw = get_balance(buy_currency) # 매도 후 원화 잔액
+                print(sell_coin, ' Sell Comlete..')
+                time.sleep(30)
     except Exception as ex:
         print("sell_all() -> exception! " + str(ex))
 
