@@ -146,7 +146,7 @@ while True:
                 # print("df"+str(df))
         print("Balance : ")
         print(df)
-        print(df['coin'].values[0])
+        print(df['balance'].values[0])
 
 
         time.sleep(1) 
