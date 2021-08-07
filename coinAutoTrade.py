@@ -24,6 +24,7 @@ buy_krw = "" # 매수 원화 합계
 sell_krw = "" # 매도 원화 합계
 symbol_list = []#위 상위 10개를 담는 리스트
 global df_sort_group_top10
+first_running_YN = "Y"
 #
  
    
@@ -228,7 +229,7 @@ def sell_all():
                 upbit.sell_market_order(sell_coin_and_currency, sell_amount)  #보유수량 시장가매도
                 sell_krw = get_balance(buy_currency) # 매도 후 원화 잔액
                 print(sell_coin, ' Sell Comlete..')
-                time.sleep(30)
+                time.sleep(15)
     except Exception as ex:
         print("sell_all() -> exception! " + str(ex))
 
@@ -247,15 +248,16 @@ while True:
         df_get_balance_all = get_balance_all() #잔고확인
         bought_list = df_get_balance_all['coin']# 매수 완료된 종목 리스트
 
-
-        target_buy_count = 5 # 매수할 종목 수
-        buy_percent = 0.2 #증거금 대비 매수비율
-        total_cash = int(get_balance(buy_currency))   # 100% 증거금 주문 가능 금액 조회
-        buy_amount = total_cash * buy_percent  # 종목별 주문 금액 계산
-        print('[setting]Buy Targets :', target_buy_count) # 매수할 종목 수
-        print('[setting]100% cash amount :', total_cash) #100% 증거금 주문 가능 금액
-        print('[setting]Buy percent per target :', buy_percent) #종목별 주문 비율
-        print('[setting]Buy amont per target :', buy_amount) #종목별 주문 금액
+        if(first_running_YN=="Y"):
+            target_buy_count = 5 # 매수할 종목 수
+            buy_percent = 0.2 #증거금 대비 매수비율
+            total_cash = int(get_balance(buy_currency))   # 100% 증거금 주문 가능 금액 조회
+            buy_amount = total_cash * buy_percent  # 종목별 주문 금액 계산
+            print('[setting]Buy Targets :', target_buy_count) # 매수할 종목 수
+            print('[setting]100% cash amount :', total_cash) #100% 증거금 주문 가능 금액
+            print('[setting]Buy percent per target :', buy_percent) #종목별 주문 비율
+            print('[setting]Buy amont per target :', buy_amount) #종목별 주문 금액
+            first_running_YN = "N"
 
         now = datetime.datetime.now()
         now_date = now.strftime('%Y-%m-%d')
@@ -267,6 +269,7 @@ while True:
         if start_time < now < sell_time :
 
             if len(symbol_list) < 10:
+                time.sleep(10)
                 # 거래대금 상위 10 코인리스트(코인명,거래대금) 에서 코인명만 list에 넣기
                 df_sort_group_top10 = df_sort_group_top10()
                 symbol_list = df_sort_group_top10['coin'] #매수할 종목 리스트
@@ -277,17 +280,18 @@ while True:
                 # print("symbol "+ str(sym))
                 if len(bought_list) < target_buy_count: 
                     buy_coin(sym)
-                    time.sleep(1)
+                    time.sleep(5)
         if sell_time < now < exit_time:
             if len(bought_list) > 0:
                 print("sell all")
                 sell_all()
+                time.sleep(10)
                 df_sort_group_top10 = df_sort_group_top10.drop(df_sort_group_top10.index[range(10)])
 
 
     except Exception as e:
         print(e)
-        time.sleep(1)
+        time.sleep(10)
 
  
 # print(json_val['acc_trade_price_24h'])
