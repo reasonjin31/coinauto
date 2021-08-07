@@ -108,6 +108,20 @@ def df_sort_group_top10():
     df_sort_group_top10 = df.sort_values(by="trade_price", ascending=False).head(10)
     return df_sort_group_top10
 
+def get_balance_all():
+    balances = upbit.get_balances()
+    df = pd.DataFrame(columns = ['coin' , 'balance'])
+    for i in range(0,len(balances)) :
+        df.loc[i]=[ str(balances[i]['currency']), str(balances[i]['balance'])]
+            # print("i"+str(i))
+            # print("x"+str(balances[i]))
+            # print("y"+str(balances[i]['currency']))
+            # print("z"+str(balances[i]['balance']))
+            # print("xxx"+str(df))
+            # print("df"+str(df))
+    print("Balance : ")
+    print(df)
+    return df   
 
 while True:  
     try:
@@ -133,30 +147,19 @@ while True:
         # return df   
 
 
+        df_get_balance_all = get_balance_all()
+        list_get_balance_all = df_get_balance_all['coin']
+        print('list_get_balance_all')
+        print(str(list_get_balance_all)) 
 
-        balances = upbit.get_balances()
-        ticker = 'KRW'
-        # df = pd.DataFrame(columns = ['coin' , 'balance'])
-        # for i in range(0,len(balances)) :
-        #     df.loc[i]=[ str(balances[i]['currency']), str(balances[i]['balance'])]
-        #         # print("i"+str(i))
-        #         # print("x"+str(balances[i]))
-        #         # print("y"+str(balances[i]['currency']))
-        #         # print("z"+str(balances[i]['balance']))
-        #         # print("xxx"+str(df))
-        #         # print("df"+str(df))
-        # print("Balance : ")
-        # print(df)
-        # print(df['balance'].values[0])
-        for b in balances:
-            if b['currency'] == ticker:
-                if b['balance'] is not None:
-                    print( float(b['balance']))
-             
-                    
-
-
-        time.sleep(1) 
+        for i in list_get_balance_all:
+            # if s_balance > 0.00008:
+            print("i")
+            print(str(i)) 
+                # current_price = get_current_price(df_get_balance_all['coin'])
+                # upbit.sell_market_order(df_get_balance_all['coin'],  s_balance*0.9995) 
+                # sell_krw = get_balance(buy_currency) # 매도 후 원화 잔액
+                # print(sell_ticker, ' 매도 완료..')
     except Exception as e:
         print(e)
         time.sleep(1)
