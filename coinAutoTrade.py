@@ -23,6 +23,7 @@ myToken = "xoxb-2169356768131-2166089342501-hLWTBMNoT3jLYtPv5NQTehaJ" # slack Ke
 buy_krw = "" # 매수 원화 합계 
 sell_krw = "" # 매도 원화 합계
 global df_sort_group_top10 #상위 10개 코인을 담는 global 변수
+global symbol_list #위 상위 10개를 담는 리스트
 #
  
    
@@ -237,7 +238,7 @@ while True:
         # 9:00 < 현재 < 8:59:50 사이에 타겟가를 충족 시 매수
         if start_time < now < sell_time :
 
-            if len(df_sort_group_top10) < 10:
+            if len(symbol_list) < 10:
                 # 거래대금 상위 10 코인리스트(코인명,거래대금) 에서 코인명만 list에 넣기
                 df_sort_group_top10 = df_sort_group_top10()
                 symbol_list = df_sort_group_top10['coin'] #매수할 종목 리스트
