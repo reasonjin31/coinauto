@@ -261,7 +261,7 @@ while True:
             symbol_list = df_sort_group_top10['coin'] #매수할 종목 리스트
             print("Got Top10 Coin! here is Symbolist")
             print(symbol_list)
-            first_running_YN = "N"
+            first_running_YN = "N" 
 
         now = datetime.datetime.now()
         now_date = now.strftime('%Y-%m-%d')
