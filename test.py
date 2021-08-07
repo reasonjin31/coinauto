@@ -145,20 +145,22 @@ while True:
         #     # print("df"+str(df))
         
         # return df   
-
+ 
 
         df_get_balance_all = get_balance_all()
         list_get_balance_all = df_get_balance_all['coin']
         print('list_get_balance_all')
         print(str(list_get_balance_all)) 
 
-        for i in df_get_balance_all:
+        for i in range(0,len(list_get_balance_all)):
             # if s_balance > 0.00008:
             print("i") 
-            print(str(i)) 
-            print(df_get_balance_all[i])
-            print(df_get_balance_all[i]['coin'])
-            print(df_get_balance_all[i]['balance'])
+            print(str(i))
+            print(str(list_get_balance_all[i])) 
+
+            print("df_get_balance_all.loc[i]")
+            print(df_get_balance_all.loc[i])
+
                 # current_price = get_current_price(df_get_balance_all['coin'])
                 # upbit.sell_market_order(df_get_balance_all['coin'],  s_balance*0.9995) 
                 # sell_krw = get_balance(buy_currency) # 매도 후 원화 잔액
