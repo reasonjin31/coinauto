@@ -279,6 +279,10 @@ while True:
             for sym in symbol_list:
                 # print("symbol "+ str(sym))
                 print("b")
+                print("sym" +str(sym))
+                print("bought_list" +str(len(bought_list)))
+                print("target_buy_count" +str(target_buy_count))
+                
                 if len(bought_list) < target_buy_count: 
                     print("c")
                     buy_coin(sym)
