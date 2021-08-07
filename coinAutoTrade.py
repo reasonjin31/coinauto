@@ -79,8 +79,8 @@ def get_balance_all():
             # print("z"+str(balances[i]['balance']))
             # print("xxx"+str(df))
             # print("df"+str(df))
-    print("Balance : ")
-    print(df)
+    # print("Balance : ")
+    # print(df)
     return df   
 
 
@@ -203,7 +203,7 @@ def buy_coin(coin_ticker):
                 bought_list.append(coin_ticker)
 
                 #현 잔고조회
-                get_balance_all()           
+                # get_balance_all()           
 
     except Exception as ex:
         print("`buy_coin("+ str(coin_ticker) + ") -> exception! " + str(ex) + "`")
@@ -244,7 +244,7 @@ ma5 = get_ma5(coin_ticker) # 5일 이동평균선
 while True:
     try:
 
- 
+        time.sleep(5)
         df_get_balance_all = get_balance_all() #잔고확인
         bought_list = df_get_balance_all['coin']# 매수 완료된 종목 리스트
 
@@ -253,6 +253,7 @@ while True:
             buy_percent = 0.2 #증거금 대비 매수비율
             total_cash = int(get_balance(buy_currency))   # 100% 증거금 주문 가능 금액 조회
             buy_amount = total_cash * buy_percent  # 종목별 주문 금액 계산
+            print('[setting]Balance status :', str(df_get_balance_all)) # 보유종목정보
             print('[setting]Buy Targets :', target_buy_count) # 매수할 종목 수
             print('[setting]100% cash amount :', total_cash) #100% 증거금 주문 가능 금액
             print('[setting]Buy percent per target :', buy_percent) #종목별 주문 비율
