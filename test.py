@@ -154,11 +154,7 @@ while True:
 
         for i in range(0,len(list_get_balance_all)):
             # if s_balance > 0.00008:
-            print("i") 
-            print(str(i))
             print(str(list_get_balance_all[i])) 
-
-            print("df_get_balance_all.loc[i]")
             print(df_get_balance_all.loc[i]['balance'])
 
                 # current_price = get_current_price(df_get_balance_all['coin'])
