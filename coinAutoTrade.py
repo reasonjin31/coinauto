@@ -283,11 +283,11 @@ while True:
                 print("bought_list" +str(len(bought_list)))
                 print("target_buy_count" +str(target_buy_count))
                 
-                if len(bought_list) < target_buy_count: 
-                    print("c")
-                    buy_coin(sym)
-                    print("d")
-                    time.sleep(5)
+                #if len(bought_list) < target_buy_count: 
+                #    print("c")
+                buy_coin(sym)
+                #    print("d")
+                #    time.sleep(5)
         if sell_time < now < exit_time:
             if len(bought_list) > 0:
                 print("sell all")
