@@ -152,14 +152,19 @@ while True:
         print('list_get_balance_all')
         print(str(list_get_balance_all)) 
 
-        for i in list_get_balance_all:
+        for i in df_get_balance_all:
             # if s_balance > 0.00008:
-            print("i")
+            print("i") 
             print(str(i)) 
+            print(df_get_balance_all[i])
+            print(df_get_balance_all[i]['coin'])
+            print(df_get_balance_all[i]['balance'])
                 # current_price = get_current_price(df_get_balance_all['coin'])
                 # upbit.sell_market_order(df_get_balance_all['coin'],  s_balance*0.9995) 
                 # sell_krw = get_balance(buy_currency) # 매도 후 원화 잔액
                 # print(sell_ticker, ' 매도 완료..')
+                # print(upbit.sell_market_order("KRW-XRP", 30))  #리플 30개 시장가매도
+
     except Exception as e:
         print(e)
         time.sleep(1)
