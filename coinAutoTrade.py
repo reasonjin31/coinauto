@@ -248,41 +248,41 @@ while True:
         bought_list = df_get_balance_all['coin']# 매수 완료된 종목 리스트
 
 
-        # target_buy_count = 5 # 매수할 종목 수
-        # buy_percent = 0.2 #증거금 대비 매수비율
-        # total_cash = int(get_balance(buy_currency))   # 100% 증거금 주문 가능 금액 조회
-        # buy_amount = total_cash * buy_percent  # 종목별 주문 금액 계산
-        # print('[setting]Buy Targets :', target_buy_count) # 매수할 종목 수
-        # print('[setting]100% cash amount :', total_cash) #100% 증거금 주문 가능 금액
-        # print('[setting]Buy percent per target :', buy_percent) #종목별 주문 비율
-        # print('[setting]Buy amont per target :', buy_amount) #종목별 주문 금액
+        target_buy_count = 5 # 매수할 종목 수
+        buy_percent = 0.2 #증거금 대비 매수비율
+        total_cash = int(get_balance(buy_currency))   # 100% 증거금 주문 가능 금액 조회
+        buy_amount = total_cash * buy_percent  # 종목별 주문 금액 계산
+        print('[setting]Buy Targets :', target_buy_count) # 매수할 종목 수
+        print('[setting]100% cash amount :', total_cash) #100% 증거금 주문 가능 금액
+        print('[setting]Buy percent per target :', buy_percent) #종목별 주문 비율
+        print('[setting]Buy amont per target :', buy_amount) #종목별 주문 금액
 
-        # now = datetime.datetime.now()
-        # now_date = now.strftime('%Y-%m-%d')
-        # start_time = get_start_time(coin_ticker) #9:00 장 시작시간
-        # exit_time = start_time + datetime.timedelta(days=1) #9:00 + 1일 장 마감시간
-        # sell_time = exit_time - datetime.timedelta(seconds=10) #장마감 10초전
+        now = datetime.datetime.now()
+        now_date = now.strftime('%Y-%m-%d')
+        start_time = get_start_time(coin_ticker) #9:00 장 시작시간
+        exit_time = start_time + datetime.timedelta(days=1) #9:00 + 1일 장 마감시간
+        sell_time = exit_time - datetime.timedelta(seconds=10) #장마감 10초전
         
         # 9:00 < 현재 < 8:59:50 사이에 타겟가를 충족 시 매수
-        # if start_time < now < sell_time :
+        if start_time < now < sell_time :
 
-        #     if len(symbol_list) < 10:
-        #         # 거래대금 상위 10 코인리스트(코인명,거래대금) 에서 코인명만 list에 넣기
-        #         df_sort_group_top10 = df_sort_group_top10()
-        #         symbol_list = df_sort_group_top10['coin'] #매수할 종목 리스트
-        #         print("Program Start! here is Symbolist")
-        #         print(symbol_list)
+            if len(symbol_list) < 10:
+                # 거래대금 상위 10 코인리스트(코인명,거래대금) 에서 코인명만 list에 넣기
+                df_sort_group_top10 = df_sort_group_top10()
+                symbol_list = df_sort_group_top10['coin'] #매수할 종목 리스트
+                print("Program Start! here is Symbolist")
+                print(symbol_list)
 
-        #     for sym in symbol_list:
-        #         # print("symbol "+ str(sym))
-        #         if len(bought_list) < target_buy_count: 
-        #             buy_coin(sym)
-        #             time.sleep(1)
-        # if sell_time < now < exit_time:
-        if len(bought_list) > 0:
-            print("sell all")
-            sell_all()
-            df_sort_group_top10 = df_sort_group_top10.drop(df_sort_group_top10.index[range(10)])
+            for sym in symbol_list:
+                # print("symbol "+ str(sym))
+                if len(bought_list) < target_buy_count: 
+                    buy_coin(sym)
+                    time.sleep(1)
+        if sell_time < now < exit_time:
+            if len(bought_list) > 0:
+                print("sell all")
+                sell_all()
+                df_sort_group_top10 = df_sort_group_top10.drop(df_sort_group_top10.index[range(10)])
 
 
     except Exception as e:
