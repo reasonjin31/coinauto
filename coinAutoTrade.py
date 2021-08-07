@@ -22,8 +22,8 @@ startFlag = False
 myToken = "xoxb-2169356768131-2166089342501-hLWTBMNoT3jLYtPv5NQTehaJ" # slack Key
 buy_krw = "" # 매수 원화 합계 
 sell_krw = "" # 매도 원화 합계
-global df_sort_group_top10 #상위 10개 코인을 담는 global 변수
-global symbol_list #위 상위 10개를 담는 리스트
+df_sort_group_top10 = pd.DataFrame() #상위 10개 코인을 담는 global 변수
+symbol_list = []#위 상위 10개를 담는 리스트
 #
  
    
