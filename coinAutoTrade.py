@@ -233,7 +233,9 @@ while True:
 
         # bought_list = []     # 매수 완료된 종목 리스트
         target_buy_count = 5 # 매수할 종목 수
-        buy_percent = 0.2
+        buy_percent = 0.2 #증거금 대비 매수비율
+        total_cash = int(get_current_cash())   # 100% 증거금 주문 가능 금액 조회
+
 
         #print("symbolist")
         #print(symbol_list)
