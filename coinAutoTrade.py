@@ -226,7 +226,7 @@ def sell_all():
             # print(upbit.sell_market_order("KRW-XRP", 30))  #리플 30개 시장가매도
             upbit.sell_market_order(sell_coin_and_currency, sell_amount)  #보유수량 시장가매도
             sell_krw = get_balance(buy_currency) # 매도 후 원화 잔액
-            print(sell_coin, ' Sell Comletef..')
+            print(sell_coin, ' Sell Comletesell_coin..')
             time.sleep(30)
     except Exception as ex:
         print("sell_all() -> exception! " + str(ex))
