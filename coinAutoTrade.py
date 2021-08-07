@@ -68,6 +68,7 @@ def get_balance(ticker):
     return 0
 
 def get_balance_all():
+    balances = upbit.get_balances()
     df = pd.DataFrame(columns = ['coin' , 'balance'])
     for i in range(0,len(balances)) :
         df.loc[i]=[ str(balances[i]['currency']), str(balances[i]['balance'])]
@@ -77,6 +78,8 @@ def get_balance_all():
             # print("z"+str(balances[i]['balance']))
             # print("xxx"+str(df))
             # print("df"+str(df))
+    print("Balance : ")
+    print(df)
     return df   
 
 
@@ -172,25 +175,33 @@ def buy_coin(coin_ticker):
         if coin_ticker in bought_list: # 매수 완료 종목이면 더 이상 안 사도록 함수 종료
             #printlog('code:', code, 'in', bought_list)
             return False
-            
-        
-        # print('code :',coin_ticker)
 
+        #필요한 데이터 구하기    
         ma5 = get_ma5(coin_ticker) # 5일 이동평균선 구하기
         current_price = get_current_price(coin_ticker) # 현재가 구하기
         (target_price, target_rate) = get_target_price(coin_ticker, bestK) #목표가 구하기
-        print('[Target coin] :',coin_ticker,'[Target price] :', target_price, '[Now price] : ',current_price,'[5days average] :',ma5 )
-        # print('target price : ', target_price)   
-        # print('now price : ', current_price)
-        # print('5days average : ', ma5)
+
+        #루핑도는 Top10코인에 대한 로그 남기기
+        #print('[Target coin] :',coin_ticker,'[Target price] :', target_price, '[Now price] : ',current_price,'[5days average] :',ma5 )
+        
         if target_price < current_price and ma5 < current_price: # 타겟가 도달하고 현재가가 5일 이동평균선 위일 경우
-            print('got target point!!')
+
+            print('Got target point!!')
+            print('[Target coin] :',coin_ticker,'[Target price] :', target_price, '[Now price] : ',current_price,'[5days average] :',ma5 )
+    
             krw = get_balance(buy_currency) #잔고조회
             if krw > 5000: # 최소 주문금액인 5000원 이상일 때 시장가 매수
                 upbit.buy_market_order(coin_ticker, krw*0.9995) #수수료 0.05% 포함
                 buy_krw = krw 
                 print(str(coin_ticker) + 'is bought!')
                 post_message(myToken,"#coin-trading","매수 완료")
+
+                #구매한 코인 구매된 목록에 추가
+                bought_list.append(coin_ticker)
+
+                #현 잔고조회
+                get_balance_all()           
+
     except Exception as ex:
         print("`buy_coin("+ str(coin_ticker) + ") -> exception! " + str(ex) + "`")
 
@@ -253,7 +264,7 @@ while True:
         if sell_time < now < exit_time:
             if len(bought_list) > 0:
                 print("sell all")
-                #sell_all()
+                sell_all()
                 df_sort_group_top10 = df_sort_group_top10.drop(df_sort_group_top10.index[range(10)])
 
 
