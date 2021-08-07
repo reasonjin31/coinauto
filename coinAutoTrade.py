@@ -246,8 +246,8 @@ while True:
         bought_list = df_get_balance_all['coin']# 매수 완료된 종목 리스트
 
         if(first_running_YN=="Y"):
-            target_buy_count = 5 # 매수할 종목 수
-            buy_percent = 0.2 #증거금 대비 매수비율
+            target_buy_count = 2 # 매수할 종목 수
+            buy_percent = 0.5 #증거금 대비 매수비율
             total_cash = int(get_balance(buy_currency))   # 100% 증거금 주문 가능 금액 조회
             buy_amount = total_cash * buy_percent  # 종목별 주문 금액 계산
             print('[setting]Balance status :', str(df_get_balance_all)) # 보유종목정보
@@ -255,6 +255,12 @@ while True:
             print('[setting]100% cash amount :', total_cash) #100% 증거금 주문 가능 금액
             print('[setting]Buy percent per target :', buy_percent) #종목별 주문 비율
             print('[setting]Buy amont per target :', buy_amount) #종목별 주문 금액
+            # 거래대금 상위 10 코인리스트(코인명,거래대금) 에서 코인명만 list에 넣기
+            df_sort_group_top10 = df_sort_group_top10()
+            print("df_sort_group_top10 "+str(df_sort_group_top10))
+            symbol_list = df_sort_group_top10['coin'] #매수할 종목 리스트
+            print("Got Top10 Coin! here is Symbolist")
+            print(symbol_list)
             first_running_YN = "N"
 
         now = datetime.datetime.now()
@@ -265,16 +271,9 @@ while True:
         
         # 9:00 < 현재 < 8:59:50 사이에 타겟가를 충족 시 매수
         if start_time < now < sell_time :
-            symbol_list = []
             
             if len(symbol_list) < 10:
                 time.sleep(1)
-                # 거래대금 상위 10 코인리스트(코인명,거래대금) 에서 코인명만 list에 넣기
-                df_sort_group_top10 = df_sort_group_top10()
-                print("df_sort_group_top10 "+str(df_sort_group_top10))
-                symbol_list = df_sort_group_top10['coin'] #매수할 종목 리스트
-                print("Got Top10 Coin! here is Symbolist")
-                print(symbol_list)
                 print("a")
             for sym in symbol_list:
                 # print("symbol "+ str(sym))
