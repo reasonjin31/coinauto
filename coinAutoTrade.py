@@ -18,11 +18,12 @@ high = "" # 고가
 low = "" # 저가
 open = "" # 시가
 close = "" # 종가
-startFlag = False 
+startFlag = False  
 myToken = "xoxb-2169356768131-2166089342501-hLWTBMNoT3jLYtPv5NQTehaJ" # slack Key
 buy_krw = "" # 매수 원화 합계 
 sell_krw = "" # 매도 원화 합계
 symbol_list = []#위 상위 10개를 담는 리스트
+global df_sort_group_top10
 #
  
    
