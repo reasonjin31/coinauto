@@ -22,6 +22,7 @@ startFlag = False
 myToken = "xoxb-2169356768131-2166089342501-hLWTBMNoT3jLYtPv5NQTehaJ" # slack Key
 buy_krw = "" # 매수 원화 합계 
 sell_krw = "" # 매도 원화 합계
+global df_sort_group_top10 #상위 10개 코인을 담는 global 변수
 #
  
    
@@ -161,7 +162,7 @@ def df_sort_group_top10():
 
     # 거래대금 상위 10 코인리스트
     df_sort_group_top10 = df.sort_values(by="trade_price", ascending=False).head(10)
-    return df_sort_group_top10
+    return  
 
 def buy_coin(coin_ticker):
     """인자로 받은 종목을 최유리 지정가 FOK 조건으로 매수한다."""
@@ -217,9 +218,7 @@ ma5 = get_ma5(coin_ticker) # 5일 이동평균선
 # 매수 조건 충족 시 한방에 모든 원화를 털어서 사기 때문에 한번 매수하면 이후 while문은 원화 잔고가 없어 그냥 루프만 돔
 while True:
     try:
-        # 거래대금 상위 10 코인리스트(코인명,거래대금) 에서 코인명만 list에 넣기
-        df_sort_group_top10 = df_sort_group_top10()
-        symbol_list = df_sort_group_top10['coin'] #매수할 종목 리스트
+
         # bought_list = []     # 매수 완료된 종목 리스트
         target_buy_count = 5 # 매수할 종목 수
         buy_percent = 0.2
@@ -237,15 +236,23 @@ while True:
         
         # 9:00 < 현재 < 8:59:50 사이에 타겟가를 충족 시 매수
         if start_time < now < sell_time :
+
+            if len(symbol_list) < 10:
+                # 거래대금 상위 10 코인리스트(코인명,거래대금) 에서 코인명만 list에 넣기
+                df_sort_group_top10 = df_sort_group_top10()
+                symbol_list = df_sort_group_top10['coin'] #매수할 종목 리스트
+
             for sym in symbol_list:
                 print("symbol "+ str(sym))
-                if len(bought_list) < target_buy_count:
+                if len(bought_list) < target_buy_count: 
                     buy_coin(sym)
                     time.sleep(1)
         if sell_time < now < exit_time:
             if len(bought_list) > 0:
                 print("sell all")
                 #sell_all()
+                df_sort_group_top10 = df_sort_group_top10.drop(df_sort_group_top10.index[range(10)])
+
 
     except Exception as e:
         print(e)
