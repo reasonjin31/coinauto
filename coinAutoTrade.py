@@ -271,7 +271,7 @@ while True:
                 time.sleep(1)
                 # 거래대금 상위 10 코인리스트(코인명,거래대금) 에서 코인명만 list에 넣기
                 df_sort_group_top10 = df_sort_group_top10()
-
+                print("df_sort_group_top10 "+str(df_sort_group_top10))
                 symbol_list = df_sort_group_top10['coin'] #매수할 종목 리스트
                 print("Got Top10 Coin! here is Symbolist")
                 print(symbol_list)
