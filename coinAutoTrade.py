@@ -18,7 +18,7 @@ high = "" # 고가
 low = "" # 저가
 open = "" # 시가
 close = "" # 종가
-startFlag = False  
+startFlag = False  c
 myToken = "xoxb-2169356768131-2166089342501-hLWTBMNoT3jLYtPv5NQTehaJ" # slack Key
 buy_krw = "" # 매수 원화 합계 
 sell_krw = "" # 매도 원화 합계
@@ -228,7 +228,7 @@ while True:
         #print(symbol_list)
         #print(len(symbol_list))
  
-
+ 
         now = datetime.datetime.now()
         now_date = now.strftime('%Y-%m-%d')
         start_time = get_start_time(coin_ticker) #9:00 장 시작시간
@@ -240,7 +240,7 @@ while True:
 
             if len(symbol_list) < 10:
                 # 거래대금 상위 10 코인리스트(코인명,거래대금) 에서 코인명만 list에 넣기
-                df_sort_group_top10 = df_sort_group_top10()
+                df_sort_group_top10()
                 symbol_list = df_sort_group_top10['coin'] #매수할 종목 리스트
                 print("symbolist")
                 print(symbol_list)
