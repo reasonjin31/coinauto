@@ -229,7 +229,7 @@ def sell_all():
                 upbit.sell_market_order(sell_coin_and_currency, sell_amount)  #보유수량 시장가매도
                 sell_krw = get_balance(buy_currency) # 매도 후 원화 잔액
                 print(sell_coin, ' Sell Comlete..')
-                time.sleep(15)
+                time.sleep(10)
     except Exception as ex:
         print("sell_all() -> exception! " + str(ex))
 
@@ -244,7 +244,7 @@ ma5 = get_ma5(coin_ticker) # 5일 이동평균선
 while True:
     try:
 
-        time.sleep(5)
+        time.sleep(3)
         df_get_balance_all = get_balance_all() #잔고확인
         bought_list = df_get_balance_all['coin']# 매수 완료된 종목 리스트
 
@@ -270,7 +270,7 @@ while True:
         if start_time < now < sell_time :
 
             if len(symbol_list) < 10:
-                time.sleep(10)
+                time.sleep(1)
                 # 거래대금 상위 10 코인리스트(코인명,거래대금) 에서 코인명만 list에 넣기
                 df_sort_group_top10 = df_sort_group_top10()
                 symbol_list = df_sort_group_top10['coin'] #매수할 종목 리스트
