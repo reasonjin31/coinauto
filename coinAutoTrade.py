@@ -212,13 +212,22 @@ def sell_all():
     try:
 
         df_get_balance_all = get_balance_all()
-        for s_balance in df_get_balance_all['balance']:
-            if s_balance > 0.00008:
-                current_price = get_current_price(df_get_balance_all['coin'])
-                upbit.sell_market_order(df_get_balance_all['coin'],  s_balance*0.9995) 
-                sell_krw = get_balance(buy_currency) # 매도 후 원화 잔액
-                print(sell_ticker, ' 매도 완료..')
-                time.sleep(30)
+        list_get_balance_all = df_get_balance_all['coin']
+
+        for i in range(0,len(list_get_balance_all)):
+            print(str(list_get_balance_all[i])) 
+            print(df_get_balance_all.loc[i]['balance'])
+
+            sell_coin = list_get_balance_all[i]
+            sell_amount = df_get_balance_all.loc[i]['balance']
+            
+            # current_price = get_current_price(df_get_balance_all['coin'])
+            # upbit.sell_market_order(df_get_balance_all['coin'],  s_balance*0.9995) 
+            # print(upbit.sell_market_order("KRW-XRP", 30))  #리플 30개 시장가매도
+            print(upbit.sell_market_order("KRW-XRP", 30))  #리플 30개 시장가매도
+            sell_krw = get_balance(buy_currency) # 매도 후 원화 잔액
+            print(sell_ticker, ' 매도 완료..')
+            time.sleep(30)
     except Exception as ex:
         print("sell_all() -> exception! " + str(ex))
 
