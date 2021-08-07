@@ -135,18 +135,25 @@ while True:
 
 
         balances = upbit.get_balances()
-        df = pd.DataFrame(columns = ['coin' , 'balance'])
-        for i in range(0,len(balances)) :
-            df.loc[i]=[ str(balances[i]['currency']), str(balances[i]['balance'])]
-                # print("i"+str(i))
-                # print("x"+str(balances[i]))
-                # print("y"+str(balances[i]['currency']))
-                # print("z"+str(balances[i]['balance']))
-                # print("xxx"+str(df))
-                # print("df"+str(df))
-        print("Balance : ")
-        print(df)
-        print(df['balance'].values[0])
+        ticker = 'KRW'
+        # df = pd.DataFrame(columns = ['coin' , 'balance'])
+        # for i in range(0,len(balances)) :
+        #     df.loc[i]=[ str(balances[i]['currency']), str(balances[i]['balance'])]
+        #         # print("i"+str(i))
+        #         # print("x"+str(balances[i]))
+        #         # print("y"+str(balances[i]['currency']))
+        #         # print("z"+str(balances[i]['balance']))
+        #         # print("xxx"+str(df))
+        #         # print("df"+str(df))
+        # print("Balance : ")
+        # print(df)
+        # print(df['balance'].values[0])
+        for b in balances:
+            if b['currency'] == ticker:
+                if b['balance'] is not None:
+                    print( float(b['balance']))
+             
+                    
 
 
         time.sleep(1) 
