@@ -174,15 +174,15 @@ def buy_coin(coin_ticker):
             return False
             
         
-        print('code :',coin_ticker)
+        # print('code :',coin_ticker)
 
         ma5 = get_ma5(coin_ticker) # 5일 이동평균선 구하기
         current_price = get_current_price(coin_ticker) # 현재가 구하기
         (target_price, target_rate) = get_target_price(coin_ticker, bestK) #목표가 구하기
-        print('coin :',coin_ticker)
-        print('target price : ', target_price)   
-        print('now price : ', current_price)
-        print('5days average : ', ma5)
+        print('[Target coin] :',coin_ticker,'[Target price] :', target_price, '[Now price] : ',current_price,'[5days average] :',ma5 )
+        # print('target price : ', target_price)   
+        # print('now price : ', current_price)
+        # print('5days average : ', ma5)
         if target_price < current_price and ma5 < current_price: # 타겟가 도달하고 현재가가 5일 이동평균선 위일 경우
             print('got target point!!')
             krw = get_balance(buy_currency) #잔고조회
@@ -242,12 +242,11 @@ while True:
                 # 거래대금 상위 10 코인리스트(코인명,거래대금) 에서 코인명만 list에 넣기
                 df_sort_group_top10 = df_sort_group_top10()
                 symbol_list = df_sort_group_top10['coin'] #매수할 종목 리스트
-                print("symbolist")
+                print("Program Start! here is Symbolist")
                 print(symbol_list)
-                print(len(symbol_list))
 
             for sym in symbol_list:
-                print("symbol "+ str(sym))
+                # print("symbol "+ str(sym))
                 if len(bought_list) < target_buy_count: 
                     buy_coin(sym)
                     time.sleep(1)
