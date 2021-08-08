@@ -140,7 +140,7 @@ while True:
             # if(str(balances[i]['currency']) != "KRW"):
             tickers_temp =  balances[i]['unit_currency']+ "-" + balances[i]['currency']           
             print("tickers_temp : ", tickers_temp)
-            currnet_price = pyupbit.get_orderbook(tickers='KRW-BTC')[0]["orderbook_units"][0]["ask_price"]#현재가조회
+            currnet_price = pyupbit.get_orderbook(tickers=tickers_temp)[0]["orderbook_units"][0]["ask_price"]#현재가조회
             print("currnet_price :",currnet_price)
             # else:
             #     currnet_price = str(balances[i]['currency'])
