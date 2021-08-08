@@ -137,13 +137,13 @@ while True:
         for i in range(0,len(balances)) :
             print("i" , str(i))
             
-            if(balances[i]['currency'] != "KRW"):
-                tickers_temp = str(balances[i]['currency'])+"-"+str(balances[i]['unit_currency'])           
+            if(str(balances[i]['currency']) != "KRW"):
+                tickers_temp = str(balances[i]['currency']),"-",str(balances[i]['unit_currency'])           
                 print("tickers_temp : ", tickers_temp)
                 currnet_price = pyupbit.get_orderbook(tickers=tickers_temp)[0]["orderbook_units"][0]["ask_price"]#현재가조회
                 print("currnet_price :",currnet_price)
             else:
-                currnet_price = balances[i]['currency']
+                currnet_price = str(balances[i]['currency'])
             df.loc[i]=[ str(balances[i]['currency']), str(balances[i]['balance']), str(balances[i]['avg_buy_price'], str(balances[i]['unit_currency']),currnet_price)]
             
             print(df)
