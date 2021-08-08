@@ -153,8 +153,10 @@ while True:
             print(df)
         
         for currency, earning_rate in zip(df['currency'],df['earning_rate']) :
-            print (type(currency, earning_rate))
-            print( currency, earning_rate )
+            # print (type(currency, earning_rate))
+           
+            if(earning_rate < -5):
+                print( currency, earning_rate )
 
         time.sleep(10)
     except Exception as e:
