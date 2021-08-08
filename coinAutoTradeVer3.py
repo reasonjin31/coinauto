@@ -348,13 +348,13 @@ while True:
                 print("sym " +str(sym))
                 
                 if len(bought_list)-3 < target_buy_count: #현재잔고에서 비트, 시아, 원화는 빼야해서 3개를 뺌 
-                    print(sym.split('-')[0])
+                    # print(sym.split('-')[0])
                     print(sym.split('-')[1])
-                    print(sym.split('-')[2])
+               
                     # print(type(bought_list))
                     # print( bought_list[0])
                     # print( bought_list[1])
-                    if sym.split('-')[0] not in bought_list[1]: #현재 잔고에서 없는 경우에만 매수
+                    if sym.split('-')[1] not in bought_list: #현재 잔고에서 없는 경우에만 매수
 
                        print(sym)
                        print(bought_list)
