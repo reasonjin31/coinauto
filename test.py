@@ -131,11 +131,13 @@ while True:
         balances = upbit.get_balances()
         df = pd.DataFrame(columns = ['coin' , 'balance'])
         print("1")
-        #print(df)
+        print(df)
+
         for i in range(0,len(balances)) :
             df.loc[i]=[ str(balances[i]['currency']), str(balances[i]['balance'])]
         print("1")
         print(df)
+        time.sleep(10)
     except Exception as e:
         print(e)
         time.sleep(1)
