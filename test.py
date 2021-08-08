@@ -142,10 +142,10 @@ while True:
                 print("tickers_temp : ", tickers_temp)
                 currnet_price = pyupbit.get_orderbook(tickers=tickers_temp)[0]["orderbook_units"][0]["ask_price"]#현재가조회
                 
-                print(type(balances[i]['avg_buy_price']))
-                print(type(currnet_price))
+                # print(type(balances[i]['avg_buy_price'])) #str
+                # print(type(currnet_price)) #float
 
-                earning_rate = (balances[i]['avg_buy_price']-currnet_price)*100/balances[i]['avg_buy_price'] #수익률 : (매수평균가-현재금액/매수평균가)*100
+                earning_rate = (float(balances[i]['avg_buy_price'])-currnet_price)*100/float(balances[i]['avg_buy_price']) #수익률 : (매수평균가-현재금액/매수평균가)*100
                 print("currnet_price :",currnet_price)
             else:
                  currnet_price = balances[i]['balance']
