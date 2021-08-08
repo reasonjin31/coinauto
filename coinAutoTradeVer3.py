@@ -345,10 +345,12 @@ while True:
                 time.sleep(2)
                 # print("symbol "+ str(sym))
 
-                print("sym" +str(sym))
+                print("sym " +str(sym))
                 
                 if len(bought_list)-3 < target_buy_count: #현재잔고에서 비트, 시아, 원화는 빼야해서 3개를 뺌 
-                    if sym not in bought_list: #현재 잔고에서 없는 경우에만 매수
+                    print(sym.split('-')[1])
+                    if sym.split('-')[1] not in bought_list: #현재 잔고에서 없는 경우에만 매수
+                       
                        print(sym)
                        print(bought_list)
                        # buy_coin(sym)
@@ -356,7 +358,7 @@ while True:
 
             if len(losscut_list) > 0:
                 for sym in losscut_list:
-                    print("Loss Cut Target Exist. Loss Cut Target : [",sym,"]")
+                    print("Loss Cut Target Exist. Loss Cut Target : [" ,sym, "]")
                     time.sleep(2)
                     sell_coin(sym)
 
