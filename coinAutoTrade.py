@@ -275,7 +275,8 @@ while True:
             if len(symbol_list) < 10:
                 time.sleep(1)
                 print("a")
-            for sym in symbol_list:
+            for sym in symbol_list: 
+                time.sleep(2)
                 # print("symbol "+ str(sym))
                 print("b")
                 print("sym" +str(sym))
