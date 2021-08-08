@@ -190,7 +190,9 @@ def buy_coin(coin_ticker):
             print('[Target coin] :',coin_ticker,'[Target price] :', target_price, '[Now price] : ',current_price,'[5days average] :',ma5 )
     
             krw = get_balance(buy_currency) #잔고조회
+            print('Got Balance : ' ,krw)
             if krw > 5000 and buy_amount > 5000: # 최소 주문금액인 5000원 이상일 때 시장가 매수(계좌 잔고와, 설정된 코인 별 타겟 매수가가 5000원 이상일 때 )
+                print("xxxxxx")
                 # print(upbit.buy_limit_order("KRW-XRP", 500, 20)) #500원에 리플20개 매수
                 # upbit.buy_market_order(coin_ticker, krw*0.9995) #수수료 0.05% 포함
                 upbit.buy_market_order(coin_ticker, buy_amount) 
