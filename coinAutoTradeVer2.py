@@ -31,7 +31,7 @@ buy_krw = "" # 매수 원화 합계
 sell_krw = "" # 매도 원화 합계
 symbol_list = []#위 상위 10개를 담는 리스트
 first_running_YN = "Y"
-loss_cut_late = -3
+loss_cut_late = -7
 #
  
    
