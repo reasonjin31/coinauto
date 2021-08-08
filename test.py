@@ -122,41 +122,20 @@ def get_balance_all():
     print("Balance : ")
     print(df)
     return df   
-
+ 
 while True:  
     try:
-        # 거래대금 상위 10 코인리스트(코인명,거래대금) 에서 코인명만 list에 넣기
-        # df_sort_group_top10 = df_sort_group_top10()
-        # symbol_list = df_sort_group_top10['coin']
+
         upbit = pyupbit.Upbit(access, secret)
 
-        # balances = upbit.get_balances()
-
-        # df = pd.DataFrame(columns = ['coin' , 'balance'])
-        # # print(balances)
-        # print(len(balances))
-        # for i in range(0,len(balances)) :
-        #     df.loc[i]=[ str(balances[i]['currency']), str(balances[i]['balance'])]
-        #     # print("i"+str(i))
-        #     # print("x"+str(balances[i]))
-        #     # print("y"+str(balances[i]['currency']))
-        #     # print("z"+str(balances[i]['balance']))
-        #     # print("xxx"+str(df))
-        #     # print("df"+str(df))
-        
-        # return df   
- 
-
         balances = upbit.get_balances()
-        print(balances)
         df = pd.DataFrame(columns = ['coin' , 'balance'])
+        print("1")
+        #print(df)
+        for i in range(0,len(balances)) :
+            df.iloc[i]=[ str(balances[i]['currency']), str(balances[i]['balance'])]
+        print("1")
         print(df)
-                # current_price = get_current_price(df_get_balance_all['coin'])
-                # upbit.sell_market_order(df_get_balance_all['coin'],  s_balance*0.9995) 
-                # sell_krw = get_balance(buy_currency) # 매도 후 원화 잔액
-                # print(sell_ticker, ' 매도 완료..')
-                # print(upbit.sell_market_order("KRW-XRP", 30))  #리플 30개 시장가매도
-
     except Exception as e:
         print(e)
         time.sleep(1)

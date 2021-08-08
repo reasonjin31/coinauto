@@ -198,13 +198,8 @@ def buy_coin(coin_ticker):
                 # upbit.buy_market_order(coin_ticker, krw*0.9995) #수수료 0.05% 포함
                 res = upbit.buy_market_order(coin_ticker, buy_amount) 
 
-                if(res == 200):
-                    print(str(coin_ticker) + ' is bought!')
-                    post_message(myToken,"#coin-trading","매수 완료")           
-                else :
-                    print("Order Fail. [res] : ",res)
-                    
-                buy_krw = krw 
+                print("Order Result [res] : ",res)
+                
 
     except Exception as ex:
         print("`buy_coin("+ str(coin_ticker) + ") -> exception! " + str(ex) + "`")
