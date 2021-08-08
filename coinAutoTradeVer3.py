@@ -348,7 +348,8 @@ while True:
                 print("sym" +str(sym))
                 
                 if len(bought_list)-3 < target_buy_count: #현재잔고에서 비트, 시아, 원화는 빼야해서 3개를 뺌 
-                    buy_coin(sym)
+                    if sym not in bought_list: #현재 잔고에서 없는 경우에만 매수
+                        buy_coin(sym)
                 #    time.sleep(5)
 
             if len(losscut_list) > 0:
