@@ -145,8 +145,8 @@ while True:
             # else:
             #     currnet_price = str(balances[i]['currency'])
             # df.loc[i]=[ str(balances[i]['currency']), str(balances[i]['balance'])]    
-            df.loc[i]=[ str(balances[i]['currency']), str(balances[i]['balance']), str(balances[i]['avg_buy_price'], str(balances[i]['unit_currency']),currnet_price)]
-            
+            df.loc[i]=[ str(balances[i]['currency']), str(balances[i]['balance']), str(balances[i]['avg_buy_price'], str(balances[i]['unit_currency']),str(currnet_price))]
+            print("df")
             print(df)
         # print("3")
         # print(df)
