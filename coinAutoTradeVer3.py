@@ -9,7 +9,7 @@ import pandas as pd
 #  Top10을 실시간으로 가져온다
 # 
 #   하락율이 7프로가 되면 자동 손절매한다.  
-
+ 
 
 access = "ASc4pLpj5pNA2U06jaBDbIx7bpxqOx2UTioPowhG"          #  본인  값으로 변경
 secret = "xrwdu1ELJ0VxxL8GqwWKkqoNxUqQKdYhYxGh8BbD"          # 본인 값으로 변경
@@ -24,7 +24,7 @@ low = "" # 저가
 open = "" # 시가
 close = "" # 종가
 startFlag = False  
-myToken = "xoxb-2169356768131-2345914455761-Dcg1KyoxNiKMyzJS9qAhSSfd" # slack Key
+myToken = "xoxb-2169356768131-2345914455761-ZxZxoaTIZRBtObF7hjL36Wjd" # slack Key
 buy_krw = "" # 매수 원화 합계 
 sell_krw = "" # 매도 원화 합계
 symbol_list = []#위 상위 10개를 담는 리스트
