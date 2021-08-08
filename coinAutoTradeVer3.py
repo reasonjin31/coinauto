@@ -354,7 +354,7 @@ while True:
                     # print(type(bought_list))
                     # print( bought_list[0])
                     # print( bought_list[1])
-                    if temp_val not in bought_list: #현재 잔고에서 없는 경우에만 매수
+                    if temp_val  in bought_list: #현재 잔고에서 없는 경우에만 매수
 
                        print("A",str(sym))
                        print("A",str(bought_list))
