@@ -131,7 +131,7 @@ while True:
         balances = upbit.get_balances()
         df = pd.DataFrame(columns = ['coin' , 'balance'])
         print("1")
-        print(df)
+        print(balances)
 
         for i in range(0,len(balances)) :
             df.loc[i]=[ str(balances[i]['currency']), str(balances[i]['balance'])]
