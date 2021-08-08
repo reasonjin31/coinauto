@@ -302,7 +302,7 @@ ma5 = get_ma5(coin_ticker) # 5일 이동평균선
 while True:
     try:
         announcement ="Start!"
-        post_message(myToken,"#coin-trading",announcement)
+        post_message(myToken,"#stock-trading",announcement)
 
         df_get_balance_all = get_balance_all() #잔고확인
         bought_list = df_get_balance_all['coin']# 매수 완료된 종목 리스트(시아, 비트, 원화 3개는 제외하고 봐야함)
