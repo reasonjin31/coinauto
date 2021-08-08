@@ -349,6 +349,8 @@ while True:
                 
                 if len(bought_list)-3 < target_buy_count: #현재잔고에서 비트, 시아, 원화는 빼야해서 3개를 뺌 
                     print(sym.split('-')[0])
+                    print(sym.split('-')[1])
+                    print(sym.split('-')[2])
                     # print(type(bought_list))
                     # print( bought_list[0])
                     # print( bought_list[1])
