@@ -354,7 +354,7 @@ while True:
                     # print(type(bought_list))
                     # print( bought_list[0])
                     # print( bought_list[1])
-                    if str(temp_val) not in bought_list: #현재 잔고에서 없는 경우에만 매수
+                    if str(temp_val) not in bought_list.values: #현재 잔고에서 없는 경우에만 매수
                        print(sym.split('-')[1]) #가공심볼
                        print("A",str(sym)) #그냥심볼
                        print("A",str(bought_list)) #체크할 대상 리스트 
