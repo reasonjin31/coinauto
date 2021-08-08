@@ -323,8 +323,8 @@ while True:
         print(str(df_sort_group_top10_list))
         df_sort_group_top10_list = df_sort_group_top10()
         print('2')
-        print("df_sort_group_top10 "+str(df_sort_group_top10))
-        symbol_list = df_sort_group_top10['coin'] #매수할 종목 리스트
+        print("df_sort_group_top10_list "+str(df_sort_group_top10_list))
+        symbol_list = df_sort_group_top10_list['coin'] #매수할 종목 리스트
         print("Got Top10 Coin! here is Symbolist")
         print(symbol_list)     
         
