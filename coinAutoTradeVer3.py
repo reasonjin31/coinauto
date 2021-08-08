@@ -24,7 +24,7 @@ low = "" # 저가
 open = "" # 시가
 close = "" # 종가
 startFlag = False  
-myToken = "xoxb-2169356768131-2166089342501-hLWTBMNoT3jLYtPv5NQTehaJ" # slack Key
+myToken = "xoxb-2169356768131-2166089342501-EC7DZusnSnVRsmr2kZukIKTK" # slack Key
 buy_krw = "" # 매수 원화 합계 
 sell_krw = "" # 매도 원화 합계
 symbol_list = []#위 상위 10개를 담는 리스트
@@ -301,6 +301,9 @@ ma5 = get_ma5(coin_ticker) # 5일 이동평균선
 # 매수 조건 충족 시 한방에 모든 원화를 털어서 사기 때문에 한번 매수하면 이후 while문은 원화 잔고가 없어 그냥 루프만 돔
 while True:
     try:
+        announcement ="Start!"
+        post_message(myToken,"#coin-trading",announcement)
+
         df_get_balance_all = get_balance_all() #잔고확인
         bought_list = df_get_balance_all['coin']# 매수 완료된 종목 리스트(시아, 비트, 원화 3개는 제외하고 봐야함)
 
