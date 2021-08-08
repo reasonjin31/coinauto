@@ -129,7 +129,7 @@ while True:
         upbit = pyupbit.Upbit(access, secret)
 
         balances = upbit.get_balances()
-        df = pd.DataFrame(columns = ['currency' , 'balance' ,'avg_buy_price','unit_currency','currnet_price'])
+        df = pd.DataFrame(columns = ['currency' , 'balance' ,'avg_buy_price','unit_currency','currnet_price','earning_rate'])
         # print("1")
         # print(df)
         # print("2")
@@ -143,9 +143,10 @@ while True:
                 currnet_price = pyupbit.get_orderbook(tickers=tickers_temp)[0]["orderbook_units"][0]["ask_price"]#현재가조회
                 print("currnet_price :",currnet_price)
             else:
-                 currnet_price = balances[i]['currency']
+                 currnet_price = balances[i]['balance']
             #df.loc[i]=[ str(balances[i]['currency']), str(balances[i]['balance'])]    
-            df.loc[i]=[ str(balances[i]['currency']), str(balances[i]['balance']), balances[i]['avg_buy_price'], balances[i]['unit_currency'],currnet_price ]
+            earning_rate = (balances[i]['avg_buy_price']-currnet_price)*100/balances[i]['avg_buy_price'] #수익률 : (매수평균가-현재금액/매수평균가)*100
+            df.loc[i]=[ str(balances[i]['currency']), str(balances[i]['balance']), balances[i]['avg_buy_price'], balances[i]['unit_currency'],currnet_price, earning_rate ]  
             print("df")
             print(df)
         # print("3")
