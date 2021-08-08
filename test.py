@@ -145,7 +145,7 @@ while True:
                 # print(type(balances[i]['avg_buy_price'])) #str
                 # print(type(currnet_price)) #float
 
-                earning_rate = (float(balances[i]['avg_buy_price'])-currnet_price)*100/float(balances[i]['avg_buy_price']) #수익률 : (매수평균가-현재금액/매수평균가)*100
+                earning_rate = (currnet_price-float(balances[i]['avg_buy_price']))*100/float(balances[i]['avg_buy_price']) #수익률 : (매수평균가-현재금액/매수평균가)*100
                 print("currnet_price :",currnet_price)
             else:
                  currnet_price = balances[i]['balance']
