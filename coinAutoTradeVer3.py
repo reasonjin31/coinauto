@@ -36,7 +36,7 @@ loss_cut_late = -7
 
 def post_message(token, channel, text):
     response = requests.post("https://slack.com/api/chat.postMessage",
-        headers={"Authorization": "Bearer "+"xoxb-2169356768131-2166089342501-UAQMDtkctWEPu8Zkwpe3wToU"},
+        headers={"Authorization":"xoxb-2169356768131-2166089342501-UAQMDtkctWEPu8Zkwpe3wToU"},
         data={"channel": channel,"text": text}
     )
     print(response)
