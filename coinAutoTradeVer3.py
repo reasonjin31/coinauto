@@ -302,13 +302,11 @@ ma5 = get_ma5(coin_ticker) # 5일 이동평균선
 while True:
     try:
         df_get_balance_all = get_balance_all() #잔고확인
-        bought_list = df_get_balance_all['coin']# 매수 완료된 종목 리스트
-        print("bought_list")
-        print(bought_list)
+        bought_list = df_get_balance_all['coin']# 매수 완료된 종목 리스트(시아, 비트, 원화 3개는 제외하고 봐야함)
 
         if(first_running_YN=="Y"):
-            target_buy_count = 2 # 매수할 종목 수
-            buy_percent = 0.5 #증거금 대비 매수비율
+            target_buy_count = 4 # 매수할 종목 수
+            buy_percent = 0.25 #증거금 대비 매수비율
             total_cash = int(get_balance(buy_currency))   # 100% 증거금 주문 가능 금액 조회
             buy_amount = total_cash * buy_percent  # 종목별 주문 금액 계산
             print('[setting]Balance status :', str(df_get_balance_all)) # 보유종목정보
@@ -319,7 +317,6 @@ while True:
             first_running_YN = "N"        
         
         # 거래대금 상위 10 코인리스트(코인명,거래대금) 에서 코인명만 list에 넣기
-
         df_sort_group_top10_list = pd.DataFrame(df_sort_group_top10()) #아 이게 참고  https://stackoverflow.com/questions/40393663/how-do-i-define-a-dataframe-in-python/40393980
         # print(type(df_sort_group_top10_list))
         # print(str(df_sort_group_top10_list))
@@ -350,10 +347,8 @@ while True:
 
                 print("sym" +str(sym))
                 
-                if len(bought_list) < target_buy_count: 
-                #    print("c")
+                if len(bought_list)-3 < target_buy_count: #현재잔고에서 비트, 시아, 원화는 빼야해서 3개를 뺌 
                     buy_coin(sym)
-                #    print("d")
                 #    time.sleep(5)
 
             if len(losscut_list) > 0:
