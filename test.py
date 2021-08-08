@@ -129,15 +129,20 @@ while True:
         upbit = pyupbit.Upbit(access, secret)
 
         balances = upbit.get_balances()
-        df = pd.DataFrame(columns = ['currency' , 'balance' ,'avg_buy_price'])
+        df = pd.DataFrame(columns = ['currency' , 'balance' ,'avg_buy_price','unit_currency','currnet_price'])
         # print("1")
         # print(df)
         # print("2")
         # print(balances)
         for i in range(0,len(balances)) :
-            df.loc[i]=[ str(balances[i]['currency']), str(balances[i]['balance']), str(balances[i]['avg_buy_price'])]
-        print("3")
-        print(df)
+            
+            currnet_price = pyupbit.get_orderbook(tickers= str(balances[i]['currency']))[0]["orderbook_units"][0]["ask_price"]#현재가조회
+            print("currnet_price :",currnet_price)
+            print("currency : ", str(balances[i]['currency']))
+            df.loc[i]=[ str(balances[i]['currency']), str(balances[i]['balance']), str(balances[i]['avg_buy_price'], str(balances[i]['unit_currency']),currnet_price)]
+
+        # print("3")
+        # print(df)
         time.sleep(10)
     except Exception as e:
         print(e)
