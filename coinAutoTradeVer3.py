@@ -24,7 +24,7 @@ low = "" # 저가
 open = "" # 시가
 close = "" # 종가
 startFlag = False  
-myToken = "xoxb-2169356768131-2345914455761-ZxZxoaTIZRBtObF7hjL36Wjd" # slack Key
+myToken = "xoxb-2169356768131-2345914455761-iFtc5xSZJGE2bOmaprx2R3AI" # slack Key
 buy_krw = "" # 매수 원화 합계 
 sell_krw = "" # 매도 원화 합계
 symbol_list = []#위 상위 10개를 담는 리스트
@@ -302,7 +302,7 @@ ma5 = get_ma5(coin_ticker) # 5일 이동평균선
 while True:
     try:
         
-        post_message(myToken,"#coin-trading","start")
+        post_message(myToken,"#stock","start")
 
         df_get_balance_all = get_balance_all() #잔고확인
         bought_list = df_get_balance_all['coin']# 매수 완료된 종목 리스트(시아, 비트, 원화 3개는 제외하고 봐야함)
