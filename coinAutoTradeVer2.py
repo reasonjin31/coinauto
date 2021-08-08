@@ -87,7 +87,41 @@ def get_balance_all():
             # print("df"+str(df))
     # print("Balance : ")
     # print(df)
-    return df   
+    return df  
+
+#수익률 및 잔고 상세정보 조회
+def get_balance_detail_all():
+    #currency : 코인명
+    #balance : 잔고(갯수)
+    #avg_buy_price : 평균매수단가(per 1 unit)
+    #unit_currency : 단위당 계산 화폐
+    #currnet_price : 현재가(per 1 unit)
+    #earning_rate : 수익률
+    balances = upbit.get_balances()
+    df = pd.DataFrame(columns = ['currency' , 'balance' ,'avg_buy_price','unit_currency','currnet_price','earning_rate'])
+
+    for i in range(0,len(balances)) :
+        print("i" , str(i)) 
+        print(balances)
+        if(str(balances[i]['currency']) != "KRW"):
+            tickers_temp =  balances[i]['unit_currency']+ "-" + balances[i]['currency']           
+            print("tickers_temp : ", tickers_temp)
+            currnet_price = pyupbit.get_orderbook(tickers=tickers_temp)[0]["orderbook_units"][0]["ask_price"]#현재가조회
+
+            earning_rate = (currnet_price-float(balances[i]['avg_buy_price']))*100/float(balances[i]['avg_buy_price']) #수익률 : (매수평균가-현재금액/매수평균가)*100
+            print("currnet_price :",currnet_price)
+        else:
+                currnet_price = balances[i]['balance']
+                earning_rate = 100 
+
+        df.loc[i]=[ str(balances[i]['currency']), str(balances[i]['balance']), balances[i]['avg_buy_price'], balances[i]['unit_currency'],currnet_price, earning_rate ]  
+    return df    
+
+#손절매 대상 조회
+def get_loss_cut_target():
+    df = get_balance_detail_all()
+    for i in range(0,len(balances)) :
+
 
 
 def get_ma5(ticker):

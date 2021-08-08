@@ -130,10 +130,7 @@ while True:
 
         balances = upbit.get_balances()
         df = pd.DataFrame(columns = ['currency' , 'balance' ,'avg_buy_price','unit_currency','currnet_price','earning_rate'])
-        # print("1")
-        # print(df)
-        # print("2")
-        # print(balances)
+
         for i in range(0,len(balances)) :
             print("i" , str(i)) 
             print(balances)
@@ -150,13 +147,14 @@ while True:
             else:
                  currnet_price = balances[i]['balance']
                  earning_rate = 100 
-            #df.loc[i]=[ str(balances[i]['currency']), str(balances[i]['balance'])]    
-            
+
             df.loc[i]=[ str(balances[i]['currency']), str(balances[i]['balance']), balances[i]['avg_buy_price'], balances[i]['unit_currency'],currnet_price, earning_rate ]  
             print("df")
             print(df)
-        # print("3")
-        # print(df)
+        
+        for currency, earning_rate in zip(df['currency'],df['earning_rate']) :
+            print( currency, earning_rate )
+
         time.sleep(10)
     except Exception as e:
         print(e)
