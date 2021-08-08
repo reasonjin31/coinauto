@@ -349,15 +349,15 @@ while True:
                 
                 if len(bought_list)-3 < target_buy_count: #현재잔고에서 비트, 시아, 원화는 빼야해서 3개를 뺌 
                     # print(sym.split('-')[0])
-                    print(sym.split('-')[1])
+                   
                     temp_val = sym.split('-')[1]
                     # print(type(bought_list))
                     # print( bought_list[0])
                     # print( bought_list[1])
-                    if temp_val  in bought_list: #현재 잔고에서 없는 경우에만 매수
-
-                       print("A",str(sym))
-                       print("A",str(bought_list))
+                    if temp_val not in bought_list: #현재 잔고에서 없는 경우에만 매수
+                       print(sym.split('-')[1]) #가공심볼
+                       print("A",str(sym)) #그냥심볼
+                       print("A",str(bought_list)) #체크할 대상 리스트 
                        # buy_coin(sym)
                 #    time.sleep(5)
 
