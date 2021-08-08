@@ -24,7 +24,7 @@ low = "" # 저가
 open = "" # 시가
 close = "" # 종가
 startFlag = False  
-myToken = "xoxb-2169356768131-2166089342501-xTSXX3SGgp2ystyhpFTLdJEY" # slack Key
+myToken = "xoxb-2169356768131-2166089342501-UAQMDtkctWEPu8Zkwpe3wToU" # slack Key
 buy_krw = "" # 매수 원화 합계 
 sell_krw = "" # 매도 원화 합계
 symbol_list = []#위 상위 10개를 담는 리스트
@@ -36,7 +36,7 @@ loss_cut_late = -7
 
 def post_message(token, channel, text):
     response = requests.post("https://slack.com/api/chat.postMessage",
-        headers={"Authorization": "Bearer "+token},
+        headers={"Authorization": "Bearer "+"xoxb-2169356768131-2166089342501-UAQMDtkctWEPu8Zkwpe3wToU"},
         data={"channel": channel,"text": text}
     )
     print(response)
