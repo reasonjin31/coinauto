@@ -31,6 +31,7 @@ buy_krw = "" # 매수 원화 합계
 sell_krw = "" # 매도 원화 합계
 symbol_list = []#위 상위 10개를 담는 리스트
 first_running_YN = "Y"
+loss_cut_late = -7
 #
  
    
@@ -117,11 +118,20 @@ def get_balance_detail_all():
         df.loc[i]=[ str(balances[i]['currency']), str(balances[i]['balance']), balances[i]['avg_buy_price'], balances[i]['unit_currency'],currnet_price, earning_rate ]  
     return df    
 
-#손절매 대상 조회
+
+#손절매 대상 조회(지정된 loss cut rate 참조)
 def get_loss_cut_target():
     df = get_balance_detail_all()
-    for i in range(0,len(balances)) :
 
+    list = []#손절매 대상
+    #dataframe looping reference : https://ponyozzang.tistory.com/609
+    for currency, earning_rate in zip(df['currency'],df['earning_rate']) :
+        # print (type(currency, earning_rate))
+        
+        if(earning_rate < loss_cut_late):
+            print( currency, earning_rate )
+            list.append(currency)
+    return list     
 
 
 def get_ma5(ticker):
@@ -270,6 +280,22 @@ def sell_all():
     except Exception as ex:
         print("sell_all() -> exception! " + str(ex))
 
+def sell_coin(sell_coin):
+    """특정 종목을 매도한다."""
+    try:
+        sell_coin_and_currency = "KRW-"+str(sell_coin)
+        sell_amount = get_balance(sell_coin)
+
+        print("Trying to Sell [",sell_coin_and_currency,"] Coin [",sell_amount,"] Amount" ) 
+        # current_price = get_current_price(df_get_balance_all['coin'])
+        # upbit.sell_market_order(df_get_balance_all['coin'],  s_balance*0.9995) 
+        # print(upbit.sell_market_order("KRW-XRP", 30))  #리플 30개 시장가매도
+        upbit.sell_market_order(sell_coin_and_currency, sell_amount)  #보유수량 시장가매도s
+        print(sell_coin, ' Sell Comlete..')
+        time.sleep(10)
+    except Exception as ex:
+        print("sell_all() -> exception! " + str(ex))
+
 # 로그인
 upbit = pyupbit.Upbit(access, secret)
 print("Autotrade start..!!")
@@ -307,6 +333,10 @@ while True:
         exit_time = start_time + datetime.timedelta(days=1) #9:00 + 1일 장 마감시간
         sell_time = exit_time - datetime.timedelta(seconds=10) #장마감 10초전
         
+
+        #손절매 대상 조회
+        losscut_list = get_loss_cut_target()
+
         # 9:00 < 현재 < 8:59:50 사이에 타겟가를 충족 시 매수
         if start_time < now < sell_time :
             
@@ -326,6 +356,13 @@ while True:
                 buy_coin(sym)
                 #    print("d")
                 #    time.sleep(5)
+
+            if len(losscut_list) > 0:
+                for sym in losscut_list:
+                    print("Loss Cut Target Exist. Loss Cut Target : [",sym,"]")
+                    time.sleep(2)
+                    sell_coin(sym)
+
         if sell_time < now < exit_time:
             if len(bought_list) > 0:
                 print("sell all")

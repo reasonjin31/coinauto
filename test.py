@@ -154,7 +154,7 @@ def get_balance_detail_all():
 def get_loss_cut_target():
     df = get_balance_detail_all()
 
-    list = []
+    list = []#손절매 대상
     #dataframe looping reference : https://ponyozzang.tistory.com/609
     for currency, earning_rate in zip(df['currency'],df['earning_rate']) :
         # print (type(currency, earning_rate))
@@ -162,9 +162,6 @@ def get_loss_cut_target():
         if(earning_rate < -5):
             print( currency, earning_rate )
             list.append(currency)
-
-    print("last") 
-    print(list)
     return list      
 
 
