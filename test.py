@@ -141,11 +141,13 @@ while True:
                 tickers_temp =  balances[i]['unit_currency']+ "-" + balances[i]['currency']           
                 print("tickers_temp : ", tickers_temp)
                 currnet_price = pyupbit.get_orderbook(tickers=tickers_temp)[0]["orderbook_units"][0]["ask_price"]#현재가조회
+                earning_rate = (balances[i]['avg_buy_price']-currnet_price)*100/balances[i]['avg_buy_price'] #수익률 : (매수평균가-현재금액/매수평균가)*100
                 print("currnet_price :",currnet_price)
             else:
                  currnet_price = balances[i]['balance']
+                 earning_rate = 100
             #df.loc[i]=[ str(balances[i]['currency']), str(balances[i]['balance'])]    
-            earning_rate = (balances[i]['avg_buy_price']-currnet_price)*100/balances[i]['avg_buy_price'] #수익률 : (매수평균가-현재금액/매수평균가)*100
+            
             df.loc[i]=[ str(balances[i]['currency']), str(balances[i]['balance']), balances[i]['avg_buy_price'], balances[i]['unit_currency'],currnet_price, earning_rate ]  
             print("df")
             print(df)
