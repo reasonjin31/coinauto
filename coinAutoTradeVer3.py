@@ -193,7 +193,6 @@ def get_acc_trade_price_24h(coin):
  
 #거래대금 상위 10개 코인 리스트 가져오기
 def df_sort_group_top10():
-    print('3')
     possible_coin_list = get_possible_coin_list()
         # print(possible_coin_list)
 
@@ -304,6 +303,8 @@ while True:
     try:
         df_get_balance_all = get_balance_all() #잔고확인
         bought_list = df_get_balance_all['coin']# 매수 완료된 종목 리스트
+        print("bought_list")
+        print(bought_list)
 
         if(first_running_YN=="Y"):
             target_buy_count = 2 # 매수할 종목 수
@@ -318,16 +319,14 @@ while True:
             first_running_YN = "N"        
         
         # 거래대금 상위 10 코인리스트(코인명,거래대금) 에서 코인명만 list에 넣기
-        print('1')
 
-        df_sort_group_top10_list = pd.DataFrame(df_sort_group_top10())
-        print(type(df_sort_group_top10_list))
-        print(str(df_sort_group_top10_list))
-        print('2')
+        df_sort_group_top10_list = pd.DataFrame(df_sort_group_top10()) #아 이게 참고  https://stackoverflow.com/questions/40393663/how-do-i-define-a-dataframe-in-python/40393980
+        # print(type(df_sort_group_top10_list))
+        # print(str(df_sort_group_top10_list))
         print("df_sort_group_top10_list "+str(df_sort_group_top10_list))
         symbol_list = df_sort_group_top10_list['coin'] #매수할 종목 리스트
-        print("Got Top10 Coin! here is Symbolist")
-        print(symbol_list)     
+        # print("Got Top10 Coin! here is Symbolist")
+        # print(symbol_list)     
         
         now = datetime.datetime.now()
         now_date = now.strftime('%Y-%m-%d')
@@ -344,18 +343,16 @@ while True:
             
             if len(symbol_list) < 10:
                 time.sleep(1)
-                print("a")
+    
             for sym in symbol_list: 
                 time.sleep(2)
                 # print("symbol "+ str(sym))
-                print("b")
+
                 print("sym" +str(sym))
-                print("bought_list" +str(len(bought_list)))
-                print("target_buy_count" +str(target_buy_count))
                 
-                #if len(bought_list) < target_buy_count: 
+                if len(bought_list) < target_buy_count: 
                 #    print("c")
-                buy_coin(sym)
+                    buy_coin(sym)
                 #    print("d")
                 #    time.sleep(5)
 
