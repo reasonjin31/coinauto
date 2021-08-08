@@ -345,7 +345,7 @@ while True:
                 time.sleep(2)
                 # print("symbol "+ str(sym))
 
-                print("sym " +str(sym))
+                print("sym " +str(sym)) 
                 
                 if len(bought_list)-2 < target_buy_count: #현재잔고에서 비트, 시아, 원화는 빼야해서 3개를 뺌 
                     
