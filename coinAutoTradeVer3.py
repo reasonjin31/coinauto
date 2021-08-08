@@ -321,7 +321,7 @@ while True:
         print('1')
         print(type(df_sort_group_top10_list))
         print(str(df_sort_group_top10_list))
-        df_sort_group_top10_list = df_sort_group_top10()
+        df_sort_group_top10_list = pd.DataFrame(df_sort_group_top10())
         print('2')
         print("df_sort_group_top10_list "+str(df_sort_group_top10_list))
         symbol_list = df_sort_group_top10_list['coin'] #매수할 종목 리스트
