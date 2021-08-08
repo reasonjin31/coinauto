@@ -356,8 +356,8 @@ while True:
                     # print( bought_list[1])
                     if sym.split('-')[1] not in bought_list: #현재 잔고에서 없는 경우에만 매수
 
-                       print(sym)
-                       print(bought_list)
+                       print("A",str(sym))
+                       print("A",str(bought_list))
                        # buy_coin(sym)
                 #    time.sleep(5)
 
