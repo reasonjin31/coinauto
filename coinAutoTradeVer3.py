@@ -319,9 +319,9 @@ while True:
         
         # 거래대금 상위 10 코인리스트(코인명,거래대금) 에서 코인명만 list에 넣기
         print('1')
-        print(type(df_sort_group_top10))
-        print(str(df_sort_group_top10))
-        df_sort_group_top10 = df_sort_group_top10()
+        print(type(df_sort_group_top10_list))
+        print(str(df_sort_group_top10_list))
+        df_sort_group_top10_list = df_sort_group_top10()
         print('2')
         print("df_sort_group_top10 "+str(df_sort_group_top10))
         symbol_list = df_sort_group_top10['coin'] #매수할 종목 리스트
