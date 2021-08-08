@@ -133,7 +133,7 @@ while True:
         print("1")
         #print(df)
         for i in range(0,len(balances)) :
-            df.iloc[i]=[ str(balances[i]['currency']), str(balances[i]['balance'])]
+            df.loc[i]=[ str(balances[i]['currency']), str(balances[i]['balance'])]
         print("1")
         print(df)
     except Exception as e:
