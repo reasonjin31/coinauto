@@ -136,7 +136,7 @@ while True:
         # print(balances)
         for i in range(0,len(balances)) :
             print("i" , str(i))
-            
+            print(balances)
             # if(str(balances[i]['currency']) != "KRW"):
             tickers_temp = balances[i]['currency'],"-",balances[i]['unit_currency']           
             print("tickers_temp : ", tickers_temp)
