@@ -1,10 +1,10 @@
 import pyupbit
 import datetime
-from datetime import datetime
-import time, calendar
+from slacker import Slacker
+import time
 import requests
 import json 
-import time
+import calendar
 import pandas as pd
 #ver1 : 상위 10 개 리스트를 1번 가져온다. 루핑은 24시간 돌며 매수한다. 9시가 되면 모두 매도한다.
 #ver2 : 
@@ -330,17 +330,16 @@ while True:
         # print("Got Top10 Coin! here is Symbolist")
         # print(symbol_list)     
         
+
         now = datetime.datetime.now()
         now_date = now.strftime('%Y-%m-%d')
-        # start_time = get_start_time(coin_ticker) #9:00 장 시작시간
-        t_now = datetime.now()
-        start_time =t_now.replace(hour=13, minute=31, second=0, microsecond=0) #9:00 장 시작시간
+        start_time = get_start_time(coin_ticker) #9:00 장 시작시간
+        start_time = start_time + datetime.timedelta(hours=4, minutes=45) #매도 테스트 위해 변경(시작시간 낮1시 45분)
         exit_time = start_time + datetime.timedelta(days=1) #9:00 + 1일 장 마감시간
-        sell_time = exit_time - datetime.timedelta(seconds=10) #장마감 10초전
+        sell_time = exit_time - datetime.timedelta(seconds=60) #장마감 10초전
         
         print("now" + str(now))
         print("now_date" + str(now_date))
-        print("t_now" + str(t_now))
         print("start_time" + str(start_time))
         print("exit_time" + str(exit_time))
         print("sell_time" + str(sell_time))
