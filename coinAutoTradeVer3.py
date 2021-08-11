@@ -204,7 +204,7 @@ def df_sort_group_top10():
     #     # print("call : " + str(i))
     #     result = get_acc_trade_price_24h(i)
     #     # print(result)
-    #     df.loc[1]=[ 'Mango', 4, 'No' ]
+    #     df.loc[1]=[ 'Mango', 4, 'No' ] 
 
     for i in range(0,len(possible_coin_list)):
         # print("call : " + str(i))
@@ -214,7 +214,7 @@ def df_sort_group_top10():
         df.loc[i]=[ possible_coin_list[i], result]
 
     # 거래대금 상위 10 코인리스트
-    df_sort_group_top10 = df.sort_values(by="trade_price", ascending=False).head(10)
+    df_sort_group_top10 = df.sort_values(by="trade_price", ascending=False).head(13)
     return  df_sort_group_top10
 
 def buy_coin(coin_ticker):
@@ -334,16 +334,17 @@ while True:
         now = datetime.datetime.now()
         now_date = now.strftime('%Y-%m-%d')
         start_time = get_start_time(coin_ticker) #9:00 장 시작시간
-        start_time = start_time + datetime.timedelta(hours=4, minutes=50) #매도 테스트 위해 변경(시작시간 낮1시 45분)
-        exit_time = start_time 
-        # exit_time = start_time + datetime.timedelta(days=1) #9:00 + 1일 장 마감시간
+        #매도테스트위한 임시 시간변경
+        # start_time = start_time + datetime.timedelta(hours=4, minutes=50) #매도 테스트 위해 변경(시작시간 낮1시 45분)
+        # exit_time = start_time 
+        exit_time = start_time + datetime.timedelta(days=1) #9:00 + 1일 장 마감시간
         sell_time = exit_time - datetime.timedelta(minutes=3) #장마감 10초전
         
-        print("now" + str(now))
-        print("now_date" + str(now_date))
-        print("start_time" + str(start_time))
-        print("exit_time" + str(exit_time))
-        print("sell_time" + str(sell_time))
+        # print("now" + str(now))
+        # print("now_date" + str(now_date))
+        # print("start_time" + str(start_time))
+        # print("exit_time" + str(exit_time))
+        # print("sell_time" + str(sell_time))
 
 
 
