@@ -336,7 +336,7 @@ while True:
         start_time = get_start_time(coin_ticker) #9:00 장 시작시간
         start_time = start_time + datetime.timedelta(hours=4, minutes=45) #매도 테스트 위해 변경(시작시간 낮1시 45분)
         exit_time = start_time + datetime.timedelta(days=1) #9:00 + 1일 장 마감시간
-        sell_time = exit_time - datetime.timedelta(seconds=60) #장마감 10초전
+        sell_time = exit_time - datetime.timedelta(minutes=3) #장마감 10초전
         
         print("now" + str(now))
         print("now_date" + str(now_date))
