@@ -330,10 +330,20 @@ while True:
         
         now = datetime.datetime.now()
         now_date = now.strftime('%Y-%m-%d')
-        start_time = get_start_time(coin_ticker) #9:00 장 시작시간
+        # start_time = get_start_time(coin_ticker) #9:00 장 시작시간
+        t_now = datetime.now()
+        start_time =t_now.replace(hour=13, minute=31, second=0, microsecond=0) #9:00 장 시작시간
         exit_time = start_time + datetime.timedelta(days=1) #9:00 + 1일 장 마감시간
         sell_time = exit_time - datetime.timedelta(seconds=10) #장마감 10초전
         
+        print("now" + str(now))
+        print("now_date" + str(now_date))
+        print("t_now" + str(t_now))
+        print("start_time" + str(start_time))
+        print("exit_time" + str(exit_time))
+        print("sell_time" + str(sell_time))
+
+
 
         #손절매 대상 조회
         losscut_list = get_loss_cut_target()
