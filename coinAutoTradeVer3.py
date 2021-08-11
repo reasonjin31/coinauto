@@ -307,11 +307,11 @@ while True:
         post_message(myToken,"#stock","start")
 
         df_get_balance_all = get_balance_all() #잔고확인
-        bought_list = df_get_balance_all['coin']# 매수 완료된 종목 리스트(시아, 비트, 원화 3개는 제외하고 봐야함)
+        bought_list = df_get_balance_all['coin']# 매수 완료된 종목 리스트(시아, 원화 2개는 제외하고 봐야함)
 
         if(first_running_YN=="Y"):
-            target_buy_count = 4 # 매수할 종목 수
-            buy_percent = 0.25 #증거금 대비 매수비율
+            target_buy_count = 5 # 매수할 종목 수
+            buy_percent = 0.2 #증거금 대비 매수비율
             total_cash = int(get_balance(buy_currency))   # 100% 증거금 주문 가능 금액 조회
             buy_amount = total_cash * buy_percent  # 종목별 주문 금액 계산
             print('[setting]Balance status :', str(df_get_balance_all)) # 보유종목정보
