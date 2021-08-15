@@ -76,7 +76,7 @@ def get_balance(ticker):
     return 0
 
 def get_ma5(ticker):
-    "5일 이동 평균선 조회"
+    #"5일 이동 평균선 조회"
     df = pyupbit.get_ohlcv(ticker, interval="day", count=5)
     ma5 = df['close'].rolling(5).mean().iloc[-1]
     return ma5    
@@ -113,14 +113,14 @@ while True:
             if startFlag != True:
                 announcement = now_date + " auto trade start!!.\n"
                 logger.info(announcement)
-                post_message(myToken,slack,announcement)
+                # post_message(myToken,slack,announcement)
                 startFlag = True
                 isBuying = False
                 for coin_ticker in coinList:
                     (target_price, target_rate) = get_target_price(coin_ticker, bestK)
                     goal =  coin_ticker + " today's target price : " + str(target_price) + "\n required rate of increase : " + str(round(target_rate,2)) + "%\n"
                     logger.info(goal)
-                    post_message(myToken,slack,goal)
+                    # post_message(myToken,slack,goal)
             if isBuying != True: # 매수 가능 시간대 중 아직 매수 안한 상태면
                 for coin_ticker in coinList:
                     (target_price, target_rate) = get_target_price(coin_ticker, bestK)
@@ -138,7 +138,7 @@ while True:
                             upbit.buy_market_order(coin_ticker, krw*0.9995) #수수료 0.05% 포함
                             buy_krw = krw
                             print('매수 완료..')
-                            post_message(myToken,slack,"매수 완료")
+                            # post_message(myToken,slack,"매수 완료")
                             logger.info("buy seccess")
                             complete_coin = coin_ticker # 구매된 코인 확정
                             sell_ticker = complete_coin.split('-')[1]
@@ -162,7 +162,7 @@ while True:
                         startFlag = False
                         print('현재가 : ', current_price)
                         print(sell_ticker, '매수가 4% 이상 하락해서 전액 매도 완료..')
-                        post_message(myToken,slack,"매수가 4% 이상 하락해서 전액 매도 완료..")
+                        # post_message(myToken,slack,"매수가 4% 이상 하락해서 전액 매도 완료..")
         else: # 마지막 10초 남기고 종가에 시장가 매도
             startFlag = False
             s_balance = get_balance(sell_ticker)
