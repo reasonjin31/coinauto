@@ -2,7 +2,6 @@ import time
 import pyupbit
 import datetime
 import requests
-import time
 from logging import handlers
 import logging
 
