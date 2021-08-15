@@ -194,4 +194,4 @@ while True:
 
 # nohup python3 autotray.py > output.log & 
 # git pull origin main
-# 
+#  ps -ef | grep py
