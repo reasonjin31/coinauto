@@ -32,7 +32,7 @@ goal = "" # 목표가 출력
 
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
-timedFileHandler = logging.handlers.TimedRotatingFileHandler(filename='/home/ubuntu/coin/log/autotray.log',when='midnight',interval=1,encoding='utf-8')
+timedFileHandler = logging.handlers.TimedRotatingFileHandler(filename='/home/ubuntu/coinauto/log/autotray.log',when='midnight',interval=1,encoding='utf-8')
 timedFileHandler.setFormatter(formatter)
 timedFileHandler.suffix = "%Y%m%d"
 
