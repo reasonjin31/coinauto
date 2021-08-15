@@ -120,17 +120,15 @@ while True:
                     (target_price, target_rate) = get_target_price(coin_ticker, bestK)
                     goal =  coin_ticker + " today's target price : " + str(target_price) + "\n required rate of increase : " + str(round(target_rate,2)) + "%\n"
                     logger.info(goal)
-                    print(str(goal))
                     # post_message(myToken,slack,goal)
             if isBuying != True: # 매수 가능 시간대 중 아직 매수 안한 상태면
                 for coin_ticker in coinList:
                     (target_price, target_rate) = get_target_price(coin_ticker, bestK)
                     ma5 = get_ma5(coin_ticker) # 5일 이동평균선 구하기
                     current_price = get_current_price(coin_ticker) # 현재가 구하기
-
-                    print('목표가 :', coin_ticker, target_price)   
-                    print('현재가 :', coin_ticker, current_price)
-                    print('5일이동평균 :', coin_ticker, ma5)
+                    # print('목표가 :', coin_ticker, target_price)   
+                    # print('현재가 :', coin_ticker, current_price)
+                    # print('5일이동평균 :', coin_ticker, ma5)
                     
                     if target_price < current_price and ma5 < current_price: # 타겟가 도달하고 현재가가 5일 이동평균선 위일 경우
                         print(coin_ticker, '매수 시점 발견!!')
