@@ -77,6 +77,7 @@ def get_balance(ticker):
 def get_ma5(ticker):
     #"5일 이동 평균선 조회"
     df = pyupbit.get_ohlcv(ticker, interval="day", count=5)
+    time.sleep(0.2)
     ma5 = df['close'].rolling(5).mean().iloc[-1]                               
     return ma5    
 
