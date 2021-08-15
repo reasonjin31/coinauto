@@ -144,7 +144,7 @@ while True:
                             sell_ticker = complete_coin.split('-')[1]
                             isBuying = True
                             break
-                        #else:
+                        #else: 
                             # print('매수할 원화가 부족합니다')
                     # else:
                     #     print(coin_ticker, "목표가에 도달하지 않았습니다.")        
