@@ -74,7 +74,7 @@ def get_balance(ticker):
             else: 
                 return 0
     return 0
-
+  
 def get_ma5(ticker):
     #"5일 이동 평균선 조회"
     df = pyupbit.get_ohlcv(ticker, interval="day", count=5)
