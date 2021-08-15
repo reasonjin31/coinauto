@@ -71,7 +71,7 @@ def get_balance(ticker):
         if b['currency'] == ticker:
             if b['balance'] is not None:
                 return float(b['balance'])
-            else:
+            else: 
                 return 0
     return 0
 
