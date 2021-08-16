@@ -126,9 +126,9 @@ while True:
                     (target_price, target_rate) = get_target_price(coin_ticker, bestK)
                     ma5 = get_ma5(coin_ticker) # 5일 이동평균선 구하기
                     current_price = get_current_price(coin_ticker) # 현재가 구하기
-                    # print('목표가 :', coin_ticker, target_price)   
-                    # print('현재가 :', coin_ticker, current_price)
-                    # print('5일이동평균 :', coin_ticker, ma5)
+                    print('목표가 :', coin_ticker, target_price)   
+                    print('현재가 :', coin_ticker, current_price)
+                    print('5일이동평균 :', coin_ticker, ma5)
                     
                     if target_price < current_price and ma5 < current_price: # 타겟가 도달하고 현재가가 5일 이동평균선 위일 경우
                         print(coin_ticker, '매수 시점 발견!!')
@@ -136,7 +136,7 @@ while True:
                         krw = get_balance(buy_currency)
                         krw = krw*0.5##############절반만 매수하도록(20210817 이유진)
                         if krw > 5000: # 최소 주문금액인 5000원 이상일 때 시장가 매수
-                            upbit.buy_market_order(coin_ticker, krw*0.9995) #수수료 0.05% 포함
+                            #upbit.buy_market_order(coin_ticker, krw*0.9995) #수수료 0.05% 포함
                             buy_krw = krw
                             print('매수 완료..')
                             # post_message(myToken,slack,"매수 완료")
